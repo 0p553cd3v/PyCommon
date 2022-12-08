@@ -1,3 +1,11 @@
 [build-system]
 requires = ['setuptools>=42']
 build-backend = 'setuptools.build_meta'
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "*_test.py", "tests/*.py"]
+testpaths = ["tests"]
+addopts = ["--import-mode=importlib"]
+
+[tool.coverage.run]
+source = ["src"]
