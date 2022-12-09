@@ -14,4 +14,4 @@ os.chdir(build_config_path)
 build_dir = os.path.join(build_config_path, 'dist')
 
 #Run build command
-os.system("python -m pip install -e "+build_dir)
+os.system("python3 -m pip install -e "+build_dir)
