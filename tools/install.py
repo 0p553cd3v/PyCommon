@@ -18,4 +18,4 @@ file_name = sorted( file_name, key = os.path.getmtime)
 file_path = os.path.join(build_dir, file_name[-1])
 
 #Run build command
-os.system("python3 -m pip install "+build_dir+file_name[0])
+os.system("python3 -m pip install "+file_path)
