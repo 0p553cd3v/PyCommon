@@ -1,0 +1,9 @@
+#Igonre all build files
+dist
+
+#Ignore pycache
+__pychache__
+.pytest_cache
+
+#Igonre python eggs
+*.egg-info
