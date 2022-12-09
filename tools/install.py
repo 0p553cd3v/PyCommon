@@ -1,4 +1,4 @@
-"""Script to build package"""
+"""Script to install package from local build"""
 
 #Imports
 import os
