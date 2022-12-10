@@ -1,6 +1,9 @@
-name: Upload Python Package
+name: Python push to develop
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
   deploy:
