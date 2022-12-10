@@ -2,7 +2,7 @@
 dist
 
 #Ignore pycache
-__pychache__
+__pycache__
 .pytest_cache
 
 #Igonre python eggs
