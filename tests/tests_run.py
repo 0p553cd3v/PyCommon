@@ -1,4 +1,4 @@
-"""Script to run integration tests only"""
+"""Script to run all tests"""
 
 #Imports
 import os
@@ -10,6 +10,8 @@ file_path = os.path.dirname(__file__)
 os.chdir(file_path)
 
 #Run unit tests 
+print('Unit tests - Test run')
 os.system("python3 unit_tests/unit_tests_run.py")
 #Run integration tests 
+print('Integration tests - Test run')
 os.system("python3 integration_tests/integration_tests_run.py")
