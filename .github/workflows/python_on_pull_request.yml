@@ -1,4 +1,4 @@
-name: Python pull request to develop
+name: Python pull request
 
 on:
   pull_request:
