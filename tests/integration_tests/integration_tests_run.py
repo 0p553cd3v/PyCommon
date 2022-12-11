@@ -11,4 +11,4 @@ project_config_path = os.path.abspath(os.path.join(file_path, os.pardir, os.pard
 os.chdir(project_config_path)
 
 #Run test command
-os.system("pytest -m integration")
+os.system("python3 -m pytest -m integration")

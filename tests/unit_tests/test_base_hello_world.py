@@ -1,8 +1,8 @@
-from src.base import hello_world 
+import os
+import pytest
+from base import hello_world 
 
-#Import test mark
-from . import pytestmark
-
+@pytest.mark.unit
 def test_hello_world(capsys):
 	hello_world.print_hello_world()
 	out, err = capsys.readouterr()
