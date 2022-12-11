@@ -11,6 +11,4 @@ project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 os.chdir(project_config_path)
 
 #Run build 
-os.system("python3 build/build.py")
-#Run  tests 
-os.system("python3 tests/tests_run.py")
+os.system("tox -e py39")

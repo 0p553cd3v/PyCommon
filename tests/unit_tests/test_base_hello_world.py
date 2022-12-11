@@ -1,5 +1,3 @@
-import sys
-import pytest
 from src.base import hello_world 
 
 #Import test mark
