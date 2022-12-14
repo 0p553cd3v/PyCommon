@@ -25,12 +25,16 @@ jobs:
           --user
       - name: Build a binary wheel and a source tarball
         run: >-
-          python -m
-          build
-          --sdist
-          --wheel
-          --outdir dist/
-          .
+          python3 build/build.py
+      - name: Install package from binary
+        run: >-
+          python3 tools/install.py
+      - name: Run unit tests against installed package
+        run: >-
+          python3 tests/unit_tests/unit_tests_run.py   
+      - name: Run integration tests against installed package
+        run: >-
+          python3 tests/integration_tests/integration_tests_run.py            
       - name: Publish distribution 📦 to Test PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:

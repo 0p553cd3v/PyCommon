@@ -10,5 +10,8 @@ project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 #Changing directory to project config path
 os.chdir(project_config_path)
 
+#Prepare new build
+os.system("python3 build/build.py")
+
 #Run build 
-os.system("tox -e py39")
+os.system("tox")

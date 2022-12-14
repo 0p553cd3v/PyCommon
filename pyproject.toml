@@ -2,16 +2,5 @@
 requires = ['setuptools>=42']
 build-backend = 'setuptools.build_meta'
 
-[tool.pytest.ini_options]
-python_files = ["test_*.py", "*_test.py"]
-testpaths = ["tests"]
-addopts = ["--import-mode=importlib", "--strict-markers"]
-markers = [
-    #  integration tests marker
-    "integration",
-    # unit tests marker
-    "unit",
-]
-
 [tool.coverage.run]
 source = ["src"]

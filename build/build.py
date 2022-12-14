@@ -11,5 +11,5 @@ project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 os.chdir(project_config_path)
 
 #Run build command
-os.system("python3 -m build")
+os.system("python3 -m build --sdist --wheel --outdir dist/")
  
