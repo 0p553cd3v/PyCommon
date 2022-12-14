@@ -2,8 +2,11 @@
 dist
 
 #Ignore pycache
-__pychache__
+__pycache__
 .pytest_cache
 
 #Igonre python eggs
 *.egg-info
+
+#Igonre tox cache
+.tox

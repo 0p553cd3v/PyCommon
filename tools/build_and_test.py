@@ -1,4 +1,4 @@
-"""Script to build package"""
+"""Script to run all tests"""
 
 #Imports
 import os
@@ -10,6 +10,8 @@ project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 #Changing directory to project config path
 os.chdir(project_config_path)
 
-#Run build command
-os.system("python3 -m build --sdist --wheel --outdir dist/")
- 
+#Prepare new build
+os.system("python3 build/build.py")
+
+#Run build 
+os.system("tox")

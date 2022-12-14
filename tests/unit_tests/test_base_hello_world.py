@@ -1,6 +1,6 @@
-import sys
+import os
 import pytest
-from src.base import hello_world 
+from py_common.base import hello_world 
 
 def test_hello_world(capsys):
 	hello_world.print_hello_world()
