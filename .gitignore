@@ -1,5 +1,6 @@
 #Igonre all build files
 dist
+build/lib
 
 #Ignore pycache
 __pycache__
