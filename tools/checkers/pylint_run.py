@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+
 """Script to run unit tests only"""
+
 #Imports
 import os
 from pylint.lint import Run
