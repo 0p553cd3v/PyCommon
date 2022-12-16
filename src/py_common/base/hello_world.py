@@ -1,3 +1,7 @@
+"""
+Basic hello world module
+"""
+
 def print_hello_world():
-    '''Hello world simple example package'''
+    '''Hello world simple example function'''
     print("Hello world")
