@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 
+"""
+Run all script (including code checkers, unit and integration tests, build and tests against package)
+"""
+
+#Imports
 import os
 import sys
 import subprocess
 
+#Main function def
 def main():
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
@@ -49,6 +55,7 @@ def main():
 
     os.environ["PYTHONPATH"] = ""
 
+#Main function call
 if __name__ == "__main__":
     try:
         main()

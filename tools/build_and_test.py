@@ -4,16 +4,44 @@
 
 #Imports
 import os
+import sys
+import subprocess
 
-#Finding build path based on build.py script location
-file_path = os.path.dirname(__file__)
-project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
+#Main function def
+def main():
+    #Finding build path based on build.py script location
+    file_path = os.path.dirname(__file__)
+    project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
-#Changing directory to project config path
-os.chdir(project_config_path)
+    #Changing directory to project config path
+    os.chdir(project_config_path)
 
-#Prepare new build
-os.system("python3 build/build.py")
+    try:
+        #Run test command
+        print('Build - Build started')
+        subprocess.check_call(
+            [
+                "build/build.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        print(f"Build failed: {e.returncode}")
 
-#Run build 
-os.system("tox")
+    try:
+        #Run test command
+        print('Tox - Installation and testsstarted')
+        subprocess.check_call(
+            [
+                "tox",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        print(f"Instalation or tests failed failed: {e.returncode}")
+    
+#Main function call
+if __name__ == "__main__":
+    try:
+        main()
+    except subprocess.CalledProcessError as e:
+        print(f"Build failed: {e.returncode}")
+        sys.exit(1)
