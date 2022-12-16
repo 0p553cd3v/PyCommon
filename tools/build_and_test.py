@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run all tests"""
+"""Script to build package and run all tests against builded package"""
 
 #Imports
 import os
