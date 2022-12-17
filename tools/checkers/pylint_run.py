@@ -4,10 +4,15 @@
 
 #Imports
 import os
+import yaml
 from pylint.lint import Run
 
+#Read env.yaml to get project parameters
+with open(os.path.join(os.path.dirname(__file__), os.pardir,'config', 'env.yml'), 'r') as file:
+    ENV = yaml.safe_load(file) 
+
 #Define score value for a checker to accept code
-SCORE = 8.5
+score = ENV['PYLINT_SCORE']
 
 def main():
     #Finding build path based on build.py script location
@@ -21,7 +26,7 @@ def main():
 
     #Run linter command
     pylint_results = Run(pylint_args, do_exit=False)
-    if float(pylint_results.linter.stats.global_note) >= SCORE:
+    if float(pylint_results.linter.stats.global_note) >= score:
         print("PASSED\n")
         return 0
     else:
