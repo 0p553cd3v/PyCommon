@@ -31,6 +31,16 @@ def main():
         return e.returncode
 
     try:
+        #Run lizard CCN analyzer 
+        subprocess.check_call(
+            [
+                "tools/checkers/lizard_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        return e.returncode
+
+    try:
         #Run pylint checker 
         subprocess.check_call(
             [
