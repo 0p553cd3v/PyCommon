@@ -2,9 +2,6 @@
 requires = ['setuptools>=42']
 build-backend = 'setuptools.build_meta'
 
-[tool.coverage.run]
-source = ["src"]
-
 [tool.black]
 line-length = 88
 target-version = ['py311']

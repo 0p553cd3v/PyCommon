@@ -6,6 +6,7 @@
 import os
 import subprocess
 import sys
+import yaml
 
 #Main function def
 def main():
@@ -15,15 +16,26 @@ def main():
 
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
+    project_config_path = os.path.abspath(os.path.join(file_path, os.pardir,os.pardir))
 
     #Changing directory to project config path
     os.chdir(file_path)
+
+    #Read env.yaml to get project parameters
+    with open(os.path.join(project_config_path, 'config', 'env.yml'), 'r') as file:
+        ENV = yaml.safe_load(file) 
+
+    #Define score value for a checker to accept code
+    cov_limit = ENV['UT_CODE_COVERAGE']
 
     #Run test command
 
     subprocess.check_call(
         [
             "pytest",
+            "--cov=py_common",
+            "--cov-fail-under=" + str(cov_limit),
+            "--cov-branch",
         ]
     ) 
     print('PyTest run finished - Unit tests')
