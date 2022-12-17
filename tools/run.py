@@ -19,6 +19,16 @@ def main():
 
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
+    
+    try:
+        #Run black formater 
+        subprocess.check_call(
+            [
+                "tools/checkers/black_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        return e.returncode
 
     try:
         #Run pylint checker 
@@ -29,7 +39,7 @@ def main():
         ) 
     except subprocess.CalledProcessError as e:
         return e.returncode
-    
+
     try:
         #Run unit tests
         subprocess.check_call(

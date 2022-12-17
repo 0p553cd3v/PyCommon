@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run unit tests only"""
+"""Script to run pylint linter"""
 
 #Imports
 import os
