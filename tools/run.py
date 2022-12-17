@@ -22,29 +22,26 @@ def main():
 
     try:
         #Run pylint checker 
-        print('PyLint - Checker run')
         subprocess.check_call(
             [
                 "tools/checkers/pylint_run.py",
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        print(f"PyLint failed: {e.returncode}")
+        return e.returncode
     
     try:
         #Run unit tests
-        print('Unit tests - Test run')
         subprocess.check_call(
             [
                 "tests/unit_tests/unit_tests_run.py",
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        print(f"Unit tests failed: {e.returncode}")
+        return e.returncode
 
     try:
         #Run integration tests 
-        print('Integration tests - Test run')
         subprocess.check_call(
             [
                 "tests/integration_tests/integration_tests_run.py",
@@ -52,6 +49,7 @@ def main():
         )
     except subprocess.CalledProcessError as e:
         print(f"Integration tests failed: {e.returncode}")
+        return e.returncode
 
     os.environ["PYTHONPATH"] = ""
 
@@ -60,5 +58,8 @@ if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Build failed: {e.returncode}")
+        print(f"Run script failed: {e.returncode}")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Run script failed:  {e}")
         sys.exit(1)

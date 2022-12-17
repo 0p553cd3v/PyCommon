@@ -37,7 +37,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        print(f"Instllations failed: {e.returncode}")
+        print(f"Installations failed: {e.returncode}")
     
 #Main function call
 if __name__ == "__main__":
