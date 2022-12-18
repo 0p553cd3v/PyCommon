@@ -19,12 +19,22 @@ def main():
 
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
-    
+
     try:
         #Run black formater 
         subprocess.check_call(
             [
                 "tools/checkers/black_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        return e.returncode
+
+    try:
+        #Run vulture checker 
+        subprocess.check_call(
+            [
+                "tools/checkers/vulture_run.py",
             ]
         ) 
     except subprocess.CalledProcessError as e:

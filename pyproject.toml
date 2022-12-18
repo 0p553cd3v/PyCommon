@@ -8,3 +8,13 @@ target-version = ['py311']
 include = '\.pyi?$'
 # 'extend-exclude' excludes files or directories in addition to the defaults
 extend-exclude = ''
+
+[tool.vulture]
+exclude = []
+ignore_decorators = []
+ignore_names = []
+make_whitelist = true
+min_confidence = 80
+paths = ["src"]
+sort_by_size = true
+verbose = false
