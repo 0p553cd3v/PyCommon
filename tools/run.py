@@ -123,6 +123,18 @@ def main():
         print(f"Integration tests failed: {e.returncode}")
         return e.returncode
 
+    #Run pyroma checker
+    print_line_separator_with_title(" pyroma package config checker ","-",100)
+    try:
+         
+        subprocess.check_call(
+            [
+                "tools/checkers/pyroma_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        return e.returncode
+
     os.environ["PYTHONPATH"] = ""
 
 #Main function call
