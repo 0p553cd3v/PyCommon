@@ -43,22 +43,25 @@ jobs:
           pip install vulture
       - name: Run security checker
         run: |
-          python3 tools/bandit_run.py
+          python3 tools/checkers/bandit_run.py
       - name: Run code formater
         run: |
-          python3 tools/black_run.py
+          python3 tools/checkers/black_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture_run.py
+          python3 tools/checkers/vulture_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture_run.py
+          python3 tools/checkers/vulture_run.py
       - name: Run cyclomatix complexity analyzer
         run: |
-          python3 tools/lizard_run.py
+          python3 tools/checkers/lizard_run.py
       - name: Run linter
         run: |
-          python3 tools/pylint_run.py
+          python3 tools/checkers/pylint_run.py
+      - name: Run pyroma to check package standards
+        run: |
+          python3 tools/checkers/pyroma_run.py
       - name: Install pypa/build
         run: >-
           python -m
