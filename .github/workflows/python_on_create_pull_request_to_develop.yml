@@ -1,8 +1,9 @@
-name: Python pull request
+name: On create pull request to develop
 
 on:
   pull_request:
     types: [opened]
+    branches: [develop]
 
 jobs:
   deploy:
@@ -26,22 +27,22 @@ jobs:
           pip install vulture
       - name: Run security checker
         run: |
-          python3 tools/bandit.py
+          python3 tools/bandit_run.py
       - name: Run code formater
         run: |
-          python3 tools/black.py
+          python3 tools/black_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture.py
+          python3 tools/vulture_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture.py
+          python3 tools/vulture_run.py
       - name: Run cyclomatix complexity analyzer
         run: |
-          python3 tools/lizard.py
+          python3 tools/lizard_run.py
       - name: Run linter
         run: |
-          python3 tools/pylint.py
+          python3 tools/pylint_run.py
       - name: Install pypa/build
         run: >-
           python -m
