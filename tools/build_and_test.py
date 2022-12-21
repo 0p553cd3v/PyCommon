@@ -29,7 +29,7 @@ def main():
 
     try:
         #Run test command
-        print('Tox - Installation and testsstarted')
+        print('Tox - Installation and tests started')
         subprocess.check_call(
             [
                 "tox",
