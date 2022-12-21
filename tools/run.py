@@ -52,6 +52,18 @@ def main():
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
 
+    #Run bandit security checker
+    print_line_separator_with_title("Bandit security checker ","-",100)
+    try:
+         
+        subprocess.check_call(
+            [
+                "tools/checkers/bandit_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        return e.returncode
+
     #Run black formater 
     print_line_separator_with_title(" Black formatter ","-",100)
     try:
@@ -124,7 +136,7 @@ def main():
         return e.returncode
 
     #Run pyroma checker
-    print_line_separator_with_title(" pyroma package config checker ","-",100)
+    print_line_separator_with_title("pyroma package config checker ","-",100)
     try:
          
         subprocess.check_call(
