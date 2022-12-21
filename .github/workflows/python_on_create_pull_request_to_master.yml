@@ -1,11 +1,12 @@
-name: Upload Python Package
+name: On create pull request to develop
 
 on:
-  release:
-    types: [published]
+  pull_request:
+    types: [opened]
+    branches: [master]
 
 jobs:
-  deploy:
+  check_build_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -42,8 +43,6 @@ jobs:
       - name: Run linter
         run: |
           python3 tools/pylint_run.py
-      - name: Build package
-        run: python -m build
       - name: Install pypa/build
         run: >-
           python -m
@@ -52,13 +51,13 @@ jobs:
           --user
       - name: Build a binary wheel and a source tarball
         run: >-
-          python -m
-          build
-          --sdist
-          --wheel
-          --outdir dist/
-          .
-      - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}      
+          python3 build/build.py
+      - name: Install package from binary
+        run: >-
+          python3 tools/install.py
+      - name: Run unit tests against installed package
+        run: >-
+          python3 tests/unit_tests/unit_tests_run.py   
+      - name: Run integration tests against installed package
+        run: >-
+          python3 tests/integration_tests/integration_tests_run.py

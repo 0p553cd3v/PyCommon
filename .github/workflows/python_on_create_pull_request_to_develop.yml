@@ -6,7 +6,7 @@ on:
     branches: [develop]
 
 jobs:
-  deploy:
+  check_build_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -60,9 +60,4 @@ jobs:
           python3 tests/unit_tests/unit_tests_run.py   
       - name: Run integration tests against installed package
         run: >-
-          python3 tests/integration_tests/integration_tests_run.py            
-      - name: Publish distribution 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          python3 tests/integration_tests/integration_tests_run.py
