@@ -101,7 +101,7 @@ jobs:
         git clone ${{env.SOURCE_REPO}} -b ${{env.SOURCE_BRANCH}} tmp
         cd tmp
         git config user.name "Automerge Bot"
-        git config user.email "bot@example.com"
+        git config user.email "0p553cd3v@gmail.com"
         git config pull.rebase false
         git pull ${{env.DESTIANATION_REPO}} ${{env.DESTITATION_BRANCH}}
         git tag -a "RC_${{ env.TAG }}" -m "Release candidate ${{ env.TAG }} 
