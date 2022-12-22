@@ -28,8 +28,8 @@ def main():
     #Define lizard check parameters
     ccn_limit = ENV['LIZARD_CCN']
     length_limit = ENV['LIZARD_LENGTH']
-    nloc_limit = ENV['LIZARD_PAR_COUNT']
-    param_limit = ENV['LIZARD_NLOC']
+    param_limit = ENV['LIZARD_PAR_COUNT']
+    nloc_limit = ENV['LIZARD_NLOC']
 
     #Run test command
 
