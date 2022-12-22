@@ -1,11 +1,12 @@
-name: Python pull request
+name: On create pull request to develop
 
 on:
   pull_request:
     types: [opened]
+    branches: [develop]
 
 jobs:
-  deploy:
+  check_build_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,22 +27,22 @@ jobs:
           pip install vulture
       - name: Run security checker
         run: |
-          python3 tools/bandit.py
+          python3 tools/checkers/bandit_run.py
       - name: Run code formater
         run: |
-          python3 tools/black.py
+          python3 tools/checkers/black_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture.py
+          python3 tools/checkers/vulture_run.py
       - name: Run dead code checker
         run: |
-          python3 tools/vulture.py
+          python3 tools/checkers/vulture_run.py
       - name: Run cyclomatix complexity analyzer
         run: |
-          python3 tools/lizard.py
+          python3 tools/checkers/lizard_run.py
       - name: Run linter
         run: |
-          python3 tools/pylint.py
+          python3 tools/checkers/pylint_run.py
       - name: Install pypa/build
         run: >-
           python -m
@@ -59,9 +60,7 @@ jobs:
           python3 tests/unit_tests/unit_tests_run.py   
       - name: Run integration tests against installed package
         run: >-
-          python3 tests/integration_tests/integration_tests_run.py            
-      - name: Publish distribution 📦 to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          python3 tests/integration_tests/integration_tests_run.py
+      - name: Run pyroma to check package standards
+        run: |
+          python3 tools/checkers/pyroma_run.py
