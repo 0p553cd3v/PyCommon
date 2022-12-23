@@ -113,7 +113,8 @@ jobs:
         git fetch
         git checkout -b release
         git merge develop
-        git push
+        git commit -m "Merge develop branch to release branch "
+        git push -u origin release
   create_release:
     name: Create release
     needs: merge
