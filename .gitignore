@@ -1,0 +1,17 @@
+#Ignore all build files
+dist
+build/lib
+bdist*
+
+#Ignore pycache
+__pycache__
+.pytest_cache
+
+#Igonre python eggs
+*.egg-info
+
+#Igonre tox cache
+.tox
+
+#Ignore coverage
+.coverage

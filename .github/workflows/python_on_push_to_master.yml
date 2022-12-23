@@ -1,0 +1,146 @@
+name: On close pull request to develop
+
+on:
+  push:
+    branches: 
+     - master
+
+env:
+      # replace "github_username" with your GitHub username
+      # replace "github.com/username/repo.git" with your GitHub repo path
+      # do NOT replace ${{secrets.GITHUB_TOKEN}}, GitHub will take care of it
+  SOURCE_REPO: https://0p553cd3v:${{secrets.GITHUB_TOKEN}}@github.com/0p553cd3v/PyCommon.git
+
+      # replace "long-lived_branch_name" with your branch name
+  SOURCE_BRANCH: release
+
+      # replace it with the path to master repo
+  DESTINATION_REPO: https://github.com/0p553cd3v/PyCommon.git
+
+      # replace "master" with your master branch name
+  DESTINATION_BRANCH: master
+
+jobs:
+  check_build_test:
+    name: Check, build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+          pip install pytest
+          pip install pytest-cov
+          pip install bandit
+          pip install black
+          pip install lizard
+          pip install pylint
+          pip install pyroma
+          pip install vulture
+      - name: Run security checker
+        run: |
+          python3 tools/checkers/bandit_run.py
+      - name: Run code formater
+        run: |
+          python3 tools/checkers/black_run.py
+      - name: Run dead code checker
+        run: |
+          python3 tools/checkers/vulture_run.py
+      - name: Run cyclomatix complexity analyzer
+        run: |
+          python3 tools/checkers/lizard_run.py
+      - name: Run linter
+        run: |
+          python3 tools/checkers/pylint_run.py
+      - name: Install pypa/build
+        run: >-
+          python -m
+          pip install
+          build
+          --user
+      - name: Build a binary wheel and a source tarball
+        run: >-
+          python3 build/build.py
+      - name: Install package from binary
+        run: >-
+          python3 tools/install.py
+      - name: Run unit tests against installed package
+        run: >-
+          python3 tests/unit_tests/unit_tests_run.py   
+      - name: Run integration tests against installed package
+        run: >-
+          python3 tests/integration_tests/integration_tests_run.py
+      - name: Run pyroma to check package standards
+        run: |
+          python3 tools/checkers/pyroma_run.py
+  create_tag:
+    name: Create tag
+    needs: check_build_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Tag as GH env
+        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{ env.TAG }}    
+  create_release:
+    name: Create release
+    needs: create_tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Read Tag as GH env
+        id: tag
+        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.TAG }}
+          release_name: Release ${{ env.TAG }}
+          draft: false
+          prerelease: true
+  publish_package:
+    name: Publish release candidate package to Test PyPI
+    needs: create_release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: release
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+      - name: Install pypa/build
+        run: >-
+          python -m
+          pip install
+          build
+          --user
+      - name: Build a binary wheel and a source tarball
+        run: >-
+          python3 build/build.py
+      - name: Install package from binary
+        run: >-
+          python3 tools/install.py
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}     
