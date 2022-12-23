@@ -88,22 +88,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
   merge:
-    name: Merge to release branch
     runs-on: ubuntu-latest
-    needs: delete_old_branch
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: develop
-    - name: Merge with destination
-      run: |
-        git pull
-        git checkout release
-        git pull
-        git config user.name "Automerge Bot"
-        git config user.email "0p553cd3v@gmail.com"
-        git merge develop
-        git push -u origin release
+      - uses: actions/checkout@v2
+      - uses: everlytic/branch-merge@1.1.2
+        with:
+          github_token: ${{ github.token }}
+          source_ref: ${{ github.ref }}
+          target_branch: 'release'
+          commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
   create_tag:
     name: Get tag
     runs-on: ubuntu-latest
