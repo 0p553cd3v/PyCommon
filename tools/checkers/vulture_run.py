@@ -27,9 +27,7 @@ def main():
             "-m",
             "vulture",
         ]
-    ) 
-    
-    print('Vulture run finished')
+    )
 
 #Main function call
 if __name__ == "__main__":
@@ -41,3 +39,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Vulture run failed: {e}")
         sys.exit(1)
+    else:
+        print('Vulture run finished - SUCCESS')
+

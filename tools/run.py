@@ -62,7 +62,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run black formater 
     print_line_separator_with_title(" Black formatter ","-",100)
@@ -74,7 +74,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
     
     #Run vulture checker    
     print_line_separator_with_title(" Vulture dead code checker ","-",100)
@@ -86,7 +86,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run lizard CCN analyzer 
     print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
@@ -98,7 +98,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run pylint checker
     print_line_separator_with_title(" PyLint linter checker ","-",100)
@@ -110,7 +110,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run unit tests
     print_line_separator_with_title(" Unit tests ","-",100)
@@ -121,7 +121,7 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run integration tests 
     print_line_separator_with_title(" Integration tests ","-",100)
@@ -133,7 +133,7 @@ def main():
         )
     except subprocess.CalledProcessError as e:
         print(f"Integration tests failed: {e.returncode}")
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     #Run pyroma checker
     print_line_separator_with_title("pyroma package config checker ","-",100)
@@ -145,9 +145,21 @@ def main():
             ]
         ) 
     except subprocess.CalledProcessError as e:
-        return e.returncode
+        raise subprocess.CalledProcessError from e
 
     os.environ["PYTHONPATH"] = ""
+
+    #Run Build and test script
+    print_line_separator_with_title("Build and test package ","-",100)
+    try:
+         
+        subprocess.check_call(
+            [
+                "tools/build_and_test.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        raise subprocess.CalledProcessError from e
 
 #Main function call
 if __name__ == "__main__":
@@ -159,3 +171,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Run script failed:  {e}")
         sys.exit(1)
+    else:
+        print('Run script finished - SUCCESS')

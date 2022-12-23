@@ -43,8 +43,7 @@ def main():
             "-Tparameter_count=" + str(param_limit),
             "-Tnloc=" + str(nloc_limit),  
         ]
-    ) 
-    print('Lizard run finished')
+    )
 
 #Main function call
 if __name__ == "__main__":
@@ -56,5 +55,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Lizard run failed: {e}")
         sys.exit(1)
+    else:
+        print('Lizard run finished - SUCCESS')      
 
     
