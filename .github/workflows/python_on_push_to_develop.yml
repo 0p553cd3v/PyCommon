@@ -86,11 +86,26 @@ jobs:
       - name: delete branch
         uses: SvanBoxel/delete-merged-branch@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  create_tag:
-    name: Create tag
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+  merge:
+    name: Merge to release branch
     runs-on: ubuntu-latest
     needs: delete_old_branch
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: release
+    - name: Merge with destination
+      run: |
+        git config user.name "Automerge Bot"
+        git config user.email "0p553cd3v@gmail.com"
+        git merge develop
+        git commit -m "Merge develop branch to release branch "
+        git push
+  create_tag:
+    name: Get tag
+    runs-on: ubuntu-latest
+    needs: merge
     steps:
       - uses: actions/checkout@v3
       - name: Set up Tag as GH env
@@ -99,22 +114,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
         with:
-          tag: RC_${{ env.TAG }}    
-  merge:
-    name: Merge to release branch
-    runs-on: ubuntu-latest
-    needs: create_tag
-    steps:
-    - uses: actions/checkout@v3
-    - name: Merge with destination
-      run: |
-        git config user.name "Automerge Bot"
-        git config user.email "0p553cd3v@gmail.com"
-        git fetch
-        git checkout -b release
-        git merge develop
-        git commit -m "Merge develop branch to release branch "
-        git push -u origin release
+          tag: RC_${{ env.TAG }} 
   create_release:
     name: Create release
     needs: merge
