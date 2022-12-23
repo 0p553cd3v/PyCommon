@@ -93,8 +93,6 @@ jobs:
     needs: delete_old_branch
     steps:
       - uses: actions/checkout@v3
-      - name: Debug
-        run: ls -l
       - name: Set up Tag as GH env
         id: tag
         run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
@@ -107,6 +105,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: create_tag
     steps:
+    - uses: actions/checkout@v3
     - name: Merge with destination
       run: |
         git clone ${{env.SOURCE_REPO}} -b ${{env.SOURCE_BRANCH}} tmp
@@ -114,7 +113,6 @@ jobs:
         git config user.name "Automerge Bot"
         git config user.email "0p553cd3v@gmail.com"
         git config pull.rebase false
-        git pull ${{env.DESTIANATION_REPO}} ${{env.DESTITATION_BRANCH}}
         git tag -a "RC_${{ env.TAG }}" -m "Release candidate ${{ env.TAG }} 
         git push 
   create_release:
@@ -123,7 +121,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: release
       - name: Create Release
