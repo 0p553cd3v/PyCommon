@@ -108,6 +108,8 @@ jobs:
     needs: merge
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: release
       - name: Set up Tag as GH env
         id: tag
         run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
@@ -117,7 +119,7 @@ jobs:
           tag: RC_${{ env.TAG }} 
   create_release:
     name: Create release
-    needs: merge
+    needs: create_tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
