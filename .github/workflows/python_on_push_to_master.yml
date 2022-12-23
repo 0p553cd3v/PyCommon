@@ -83,6 +83,7 @@ jobs:
     needs: check_build_test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Set up Tag as GH env
         run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
       - uses: actions/checkout@v3

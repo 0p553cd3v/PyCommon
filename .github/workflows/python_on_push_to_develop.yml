@@ -92,6 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: delete_old_branch
     steps:
+      - uses: actions/checkout@v3
       - name: Debug
         run: ls -l
       - name: Set up Tag as GH env
