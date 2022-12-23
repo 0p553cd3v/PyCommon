@@ -113,7 +113,7 @@ jobs:
         git config user.name "Automerge Bot"
         git config user.email "0p553cd3v@gmail.com"
         git config pull.rebase false
-        git tag -a "RC_${{ env.TAG }}" -m "Release candidate ${{ env.TAG }} 
+        git tag -a "RC_${{ env.TAG }}" -m "Release candidate ${{ env.TAG }}"" 
         git push -u origin release
   create_release:
     name: Create release
