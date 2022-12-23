@@ -94,14 +94,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: release
+        ref: develop
     - name: Merge with destination
       run: |
+        git pull
+        git checkout release
+        git pull
         git config user.name "Automerge Bot"
         git config user.email "0p553cd3v@gmail.com"
         git merge develop
-        git commit -m "Merge develop branch to release branch "
-        git push
+        git push -u origin release
   create_tag:
     name: Get tag
     runs-on: ubuntu-latest
