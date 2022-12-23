@@ -93,7 +93,12 @@ jobs:
     needs: delete_old_branch
     steps:
       - name: Set up Tag as GH env
+        id: tag
         run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+      - name: Read exported tag
+        run: |
+          echo "$TAG"
+          echo "${{ env.TAG }}"
       - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
         with:

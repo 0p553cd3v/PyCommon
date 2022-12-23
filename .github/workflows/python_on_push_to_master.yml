@@ -98,6 +98,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
+      - name: Read Tag as GH env
+        id: tag
+        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+      - name: Read exported tag
+        run: |
+          echo "$TAG"
+          echo "${{ env.TAG }}"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
