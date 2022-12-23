@@ -53,7 +53,7 @@ def main():
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
 
     #Run bandit security checker
-    print_line_separator_with_title("Bandit security checker ","-",100)
+    print_line_separator_with_title(" Bandit security checker ","-",100)
     try:
          
         subprocess.check_call(
