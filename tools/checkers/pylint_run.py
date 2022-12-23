@@ -32,11 +32,9 @@ def main():
     #Run linter command
     pylint_results = Run(pylint_args, do_exit=False)
     if float(pylint_results.linter.stats.global_note) >= score:
-        print("PyLint run finished - PASSED\n")
-        return 0
+        return True
     else:
-        print("PyLint run finished - FAILED\n")
-        return 1
+        raise Exception(f"PyLint run finished - FAILED - Score below treshold {pylint_results.linter.stats.global_note} <= {score}\n")
 
 if __name__ == "__main__":
     try:
@@ -44,3 +42,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"PyLint run failed: {e}")
         sys.exit(1)
+    else:
+        print('PyLint run finished - SUCCESS')

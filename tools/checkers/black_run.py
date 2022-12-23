@@ -26,13 +26,10 @@ def main():
             "python3",
             "-m",
             "black",
-            "--diff",
             "--verbose",
             "./src",
         ]
     ) 
-    
-    print('Black run finished')
 
 #Main function call
 if __name__ == "__main__":
@@ -44,3 +41,5 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Black run failed: {e}")
         sys.exit(1)
+    else:
+        print('Black run finished - SUCCESS')   

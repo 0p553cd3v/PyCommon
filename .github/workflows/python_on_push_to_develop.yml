@@ -1,9 +1,9 @@
 name: On close pull request to develop
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [develop]
+  push:
+    branches: 
+      - develop
 
 env:
       # replace "github_username" with your GitHub username
@@ -35,6 +35,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install build
           pip install pytest
+          pip install pytest-cov
           pip install bandit
           pip install black
           pip install lizard
@@ -47,9 +48,6 @@ jobs:
       - name: Run code formater
         run: |
           python3 tools/checkers/black_run.py
-      - name: Run dead code checker
-        run: |
-          python3 tools/checkers/vulture_run.py
       - name: Run dead code checker
         run: |
           python3 tools/checkers/vulture_run.py

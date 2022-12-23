@@ -39,8 +39,6 @@ def main():
             str(min_score),
         ]
     ) 
-    
-    print('pyroma run finished')
 
 #Main function call
 if __name__ == "__main__":
@@ -52,3 +50,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"pyroma run failed: {e}")
         sys.exit(1)
+    else:
+        print('pyroma run finished - SUCCESS')
+        

@@ -28,8 +28,8 @@ def main():
     #Define lizard check parameters
     ccn_limit = ENV['LIZARD_CCN']
     length_limit = ENV['LIZARD_LENGTH']
-    nloc_limit = ENV['LIZARD_PAR_COUNT']
-    param_limit = ENV['LIZARD_NLOC']
+    param_limit = ENV['LIZARD_PAR_COUNT']
+    nloc_limit = ENV['LIZARD_NLOC']
 
     #Run test command
 
@@ -43,8 +43,7 @@ def main():
             "-Tparameter_count=" + str(param_limit),
             "-Tnloc=" + str(nloc_limit),  
         ]
-    ) 
-    print('Lizard run finished')
+    )
 
 #Main function call
 if __name__ == "__main__":
@@ -56,5 +55,7 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Lizard run failed: {e}")
         sys.exit(1)
+    else:
+        print('Lizard run finished - SUCCESS')      
 
     

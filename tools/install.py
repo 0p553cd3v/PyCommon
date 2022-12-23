@@ -24,25 +24,24 @@ def main():
     file_name = sorted( file_name, key = os.path.getmtime)
     file_path = os.path.join(build_dir, file_name[-1])
 
-    try:
-        #    #Run test command
-        print('Local installation - Installation started')
-        subprocess.check_call(
-            [
-                "python3",
-                "-m",
-                "pip",
-                "install",
-                file_path,
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        print(f"Installations failed: {e.returncode}")
-    
+    #Run installation command
+    print('Local installation - Installation started')
+    subprocess.check_call(
+        [
+            "python3",
+            "-m",
+            "pip",
+            "install",
+            file_path,
+        ]
+    ) 
+
 #Main function call
 if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Build failed: {e.returncode}")
+        print(f"Installation failed: {e.returncode}")
         sys.exit(1)
+    else:
+        print('Installation finished - SUCCESS')

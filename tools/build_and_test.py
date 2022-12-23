@@ -26,6 +26,7 @@ def main():
         ) 
     except subprocess.CalledProcessError as e:
         print(f"Build failed: {e.returncode}")
+        raise subprocess.CalledProcessError from e
 
     try:
         #Run test command
@@ -37,11 +38,15 @@ def main():
         ) 
     except subprocess.CalledProcessError as e:
         print(f"Instalation or tests failed failed: {e.returncode}")
+        raise subprocess.CalledProcessError from e
     
 #Main function call
 if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Build failed: {e.returncode}")
+        print(f"Build and test failed: {e.returncode}")
         sys.exit(1)
+    else:
+        print('Build and test finished - SUCCESS')
+    

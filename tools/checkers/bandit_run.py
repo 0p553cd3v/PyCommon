@@ -55,3 +55,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Bandit run failed: {e}")
         sys.exit(1)
+    else:
+        print('Bandit run finished - SUCCESS')  
+    
