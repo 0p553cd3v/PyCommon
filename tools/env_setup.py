@@ -23,6 +23,7 @@ def main():
         print('Custom python packages installation started')
         subprocess.check_call(
             [
+                "sudo",
                 "python3",
                 "-m",
                 "pip",

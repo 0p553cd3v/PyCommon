@@ -30,39 +30,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Install dependencies
+      - name: Install dependencies and setup enviroment
         run: |
-          python -m pip install --upgrade pip
-          pip install build
-          pip install pytest
-          pip install pytest-cov
-          pip install bandit
-          pip install black
-          pip install lizard
-          pip install pylint
-          pip install pyroma
-          pip install vulture
-      - name: Run security checker
+          python3 tools/env_setup.py
+      - name: Run 
         run: |
-          python3 tools/checkers/bandit_run.py
-      - name: Run code formater
-        run: |
-          python3 tools/checkers/black_run.py
-      - name: Run dead code checker
-        run: |
-          python3 tools/checkers/vulture_run.py
-      - name: Run cyclomatix complexity analyzer
-        run: |
-          python3 tools/checkers/lizard_run.py
-      - name: Run linter
-        run: |
-          python3 tools/checkers/pylint_run.py
-      - name: Install pypa/build
-        run: >-
-          python -m
-          pip install
-          build
-          --user
+          python3 tools/run.py
       - name: Build a binary wheel and a source tarball
         run: >-
           python3 build/build.py

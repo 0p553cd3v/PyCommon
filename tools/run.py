@@ -134,6 +134,18 @@ def main():
     except subprocess.CalledProcessError as e:
         print(f"Integration tests failed: {e.returncode}")
         raise subprocess.CalledProcessError from e
+    
+    #Run docstr coverage checker
+    print_line_separator_with_title("docstr coverage checker ","-",100)
+    try:
+         
+        subprocess.check_call(
+            [
+                "tools/checkers/docstrcov_run.py",
+            ]
+        ) 
+    except subprocess.CalledProcessError as e:
+        raise subprocess.CalledProcessError from e
 
     #Run pyroma checker
     print_line_separator_with_title("pyroma package config checker ","-",100)
