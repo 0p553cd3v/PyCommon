@@ -114,7 +114,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Merge develop to release
     needs: check_if_new_version
-    if: needs.check_if_new_version.outputs.rcExist == false
+    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
     steps:
       - uses: actions/checkout@v2
       - uses: everlytic/branch-merge@1.1.2
@@ -124,7 +124,7 @@ jobs:
           target_branch: 'release'
           commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
   create_release:
-    if: needs.check_if_new_version.outputs.rcExist == false
+    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
     name: Create release
     needs: merge
     runs-on: ubuntu-latest
@@ -147,7 +147,7 @@ jobs:
           draft: false
           prerelease: true
   publish_rc_package:
-    if: needs.check_if_new_version.outputs.rcExist == false
+    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
     name: Publish release candidate package to Test PyPI
     needs: create_release
     runs-on: ubuntu-latest
