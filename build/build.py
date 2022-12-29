@@ -5,8 +5,14 @@
 #Imports
 import os
 import sys
+import shutil
 import subprocess
- 
+
+#Adding path to sys to use local function defined in src folder
+sys.path.append("src")
+from py_common.file import dir
+
+
 #Main function def
 def main():
     #Finding build path based on build.py script location
@@ -17,7 +23,7 @@ def main():
     os.chdir(project_config_path)
 
     try:
-        #    #Run test command
+        #Run build command
         print('Build - Build run')
         subprocess.check_call(
             [
@@ -30,6 +36,13 @@ def main():
                 "dist/",
             ]
         ) 
+
+        #Run cleanup command
+        print('Build - Cleanup run')
+        path = os.path.join('build/lib','')
+        dir.clean_up_folder_starting_with("build","lib")
+        dir.clean_up_folder_starting_with("build","bdist")
+
     except subprocess.CalledProcessError as e:
         print(f"Build failed: {e.returncode}")
     

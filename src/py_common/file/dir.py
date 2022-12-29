@@ -4,6 +4,7 @@ Standard operations on paths
 
 # Imports
 import os
+import shutil
 
 # Functions
 def create_dir_if_not_exist(path):
@@ -26,3 +27,15 @@ def create_dir_if_not_exist(path):
         # logger.info(f"SKIP: Direcotry already exist: {path}")
         print(f"SKIP: Path already exist: {path}")
         return True
+
+
+def clean_up_folder_starting_with(directory, prefix):
+    for item in os.listdir(directory):
+        path = os.path.join(directory, item)
+        if item.startswith(prefix):
+            if os.path.isfile(path):
+                os.remove(path)
+            elif os.path.isdir(os.path.join(directory, item)):
+                shutil.rmtree(path)
+            else:
+                print("No prefix match")

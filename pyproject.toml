@@ -23,3 +23,6 @@ verbose = false
 exclude_dirs = []
 tests = []
 skips = []
+
+[tool.pydocstyle]
+ignore = 'D104'

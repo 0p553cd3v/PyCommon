@@ -11,35 +11,9 @@ import subprocess
 
 #Define functions
 
-def print_line_separator_with_title(title, separator, line_length):
-    '''Function to print separation line with some title inside'''
-    try:
-        if len(separator) != 1:
-            raise Exception("Separator length not equal to 1")
-        if len(title) > line_length:
-            raise Exception("Title length greater than line_length")
-        #Initializing string of separators as a list
-        separator_only_str=[]
-        #Filling empty string with separators only
-        for i in range(int(line_length) - len(title)):
-            separator_only_str.append(separator)
-        #Finding middle position of separator only string
-        mid_pos = len(separator_only_str) // 2
-        #Extending string as a list by title
-        separation_line = separator_only_str[:mid_pos] + [title] + separator_only_str[mid_pos:]
-        #Joining string as a list to create regular string
-        separation_line = ''.join(separation_line)
-        #print
-        print(separation_line)
-    except ValueError as e:
-        print("Wrong function input value: " + str(e))
-        sys.exit(1)
-    except TypeError as e:
-        print("Wrong function input type: " + str(e))
-        sys.exit(1)
-    except Exception as e:
-        print("Exception: " + str(e))
-        sys.exit(1)
+#Adding path to sys to use local function defined in src folder
+sys.path.append("src")
+from py_common.base import print
 
 #Main function def
 def main():
@@ -53,7 +27,7 @@ def main():
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
 
     #Run bandit security checker
-    print_line_separator_with_title(" Bandit security checker ","-",100)
+    print.print_line_separator_with_title(" Bandit security checker ","-",100)
     try:
          
         subprocess.check_call(
@@ -65,7 +39,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run black formater 
-    print_line_separator_with_title(" Black formatter ","-",100)
+    print.print_line_separator_with_title(" Black formatter ","-",100)
     try:
         
         subprocess.check_call(
@@ -77,7 +51,7 @@ def main():
         raise subprocess.CalledProcessError from e
     
     #Run vulture checker    
-    print_line_separator_with_title(" Vulture dead code checker ","-",100)
+    print.print_line_separator_with_title(" Vulture dead code checker ","-",100)
     try:
 
         subprocess.check_call(
@@ -89,7 +63,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run lizard CCN analyzer 
-    print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
+    print.print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
     try:
         
         subprocess.check_call(
@@ -101,7 +75,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run pylint checker
-    print_line_separator_with_title(" PyLint linter checker ","-",100)
+    print.print_line_separator_with_title(" PyLint linter checker ","-",100)
     try:
          
         subprocess.check_call(
@@ -113,7 +87,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run unit tests
-    print_line_separator_with_title(" Unit tests ","-",100)
+    print.print_line_separator_with_title(" Unit tests ","-",100)
     try:
         subprocess.check_call(
             [
@@ -124,7 +98,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run integration tests 
-    print_line_separator_with_title(" Integration tests ","-",100)
+    print.print_line_separator_with_title(" Integration tests ","-",100)
     try:
         subprocess.check_call(
             [
@@ -136,7 +110,7 @@ def main():
         raise subprocess.CalledProcessError from e
     
     #Run docstr coverage checker
-    print_line_separator_with_title("docstr coverage checker ","-",100)
+    print.print_line_separator_with_title("docstr coverage checker ","-",100)
     try:
          
         subprocess.check_call(
@@ -148,7 +122,7 @@ def main():
         raise subprocess.CalledProcessError from e
 
     #Run pyroma checker
-    print_line_separator_with_title("pyroma package config checker ","-",100)
+    print.print_line_separator_with_title("pyroma package config checker ","-",100)
     try:
          
         subprocess.check_call(
@@ -162,7 +136,7 @@ def main():
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
-    print_line_separator_with_title("Build and test package ","-",100)
+    print.print_line_separator_with_title("Build and test package ","-",100)
     try:
          
         subprocess.check_call(
