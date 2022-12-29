@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: delete_old_branch
     outputs:
-      rcExist: ${{ steps.init.outputs.rcExist }}
+      rcExist: ${{ steps.checkTag.outputs.rcExist }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
