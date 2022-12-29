@@ -20,6 +20,8 @@ env:
       # replace "master" with your master branch name
   DESTINATION_BRANCH: release
 
+  RC_EXIST: true
+
 jobs:
   check_build_test:
     name: Check, build and test
@@ -86,11 +88,28 @@ jobs:
       - name: delete branch
         uses: SvanBoxel/delete-merged-branch@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-  merge:
-    name: Merge to from develop release branch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  check_if_new_version:
+    name: Check if version updated on project config file
+
     runs-on: ubuntu-latest
     needs: delete_old_branch
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Read TAG from develop as GH env
+        id: tag
+        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+      - uses: mukunku/tag-exists-action@v1.2.0
+        id: checkTag
+        with: 
+          tag: RC_${{ env.TAG }}
+      - run: echo "RC_EXIST=$steps.checkTag.outputs.exists" >> $GITHUB_ENV
+  merge:
+    if: ${{ env.RC_EXIST == false }}
+    runs-on: ubuntu-latest
+    name: Merge develop to release
+    needs: check_if_new_version
     steps:
       - uses: actions/checkout@v2
       - uses: everlytic/branch-merge@1.1.2
@@ -100,6 +119,7 @@ jobs:
           target_branch: 'release'
           commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
   create_release:
+    if: ${{ env.RC_EXIST == false }}
     name: Create release
     needs: merge
     runs-on: ubuntu-latest
@@ -122,6 +142,7 @@ jobs:
           draft: false
           prerelease: true
   publish_rc_package:
+    if: ${{ env.RC_EXIST == false }}
     name: Publish release candidate package to Test PyPI
     needs: create_release
     runs-on: ubuntu-latest
