@@ -116,9 +116,6 @@ jobs:
     needs: check_if_new_version
     if: needs.check_if_new_version.outputs.rcExist == 'false'
     steps:
-      - name: Debug workflow
-        run: |
-          echo "${{ toJson(needs.check_if_new_version) }}"
       - uses: actions/checkout@v2
       - uses: everlytic/branch-merge@1.1.2
         with:
