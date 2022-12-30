@@ -24,7 +24,7 @@ def test_create_dir_when_dir_not_exist(tmp_path, capsys):
     assert err == ''
     assert os.path.exists(d)
 
-def test_create_dir_when_user_has_no_edit_permission(tmp_path, capsys):
+def test_create_dir_when_user_has_no_edit_permission(tmp_path):
     '''Simple test to assert if custom create dir function is failing if direcotry do not exist but no permission to make it'''
     p = tmp_path / "parent_dir"
     p.mkdir()

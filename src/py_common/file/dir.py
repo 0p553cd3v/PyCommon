@@ -30,6 +30,7 @@ def create_dir_if_not_exist(path):
 
 
 def clean_up_folder_starting_with(directory, prefix):
+    """Function to recursively clean a folder on a direcotry which name starts with prefix"""
     for item in os.listdir(directory):
         path = os.path.join(directory, item)
         if item.startswith(prefix):
@@ -38,4 +39,5 @@ def clean_up_folder_starting_with(directory, prefix):
             elif os.path.isdir(os.path.join(directory, item)):
                 shutil.rmtree(path)
             else:
-                print("No prefix match")
+                raise Exception("No folder prefix match")
+    return True
