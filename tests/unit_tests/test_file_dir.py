@@ -80,8 +80,20 @@ def test_clean_up_folder_starting_with_when_bad_prefix(tmp_path, capsys):
     d = tmp_path / "dir_to_be_deleted"
     d.mkdir()
     assert os.path.exists(d)
-    with pytest.raises(Exception) as exc_info:
-        dir.clean_up_folder_starting_with(tmp_path, "bad_dir")
+    result = dir.clean_up_folder_starting_with(tmp_path, "bad_dir")
+    out, err = capsys.readouterr()
     assert os.path.exists(d)
-    assert exc_info.type == Exception
-    assert exc_info.value.args[0] == 'Prefix not matching to any folder'
+    assert result == True
+    assert out.strip() == f"SKIP: Prefix: bad_dir not matching to any folder in directory: {tmp_path}"
+    assert err == ''
+
+def test_clean_up_folder_starting_with_when_name_equals_prefix(tmp_path, capsys):
+    '''Simple test to assert if folder cleanup based on prefix works'''
+    d = tmp_path / "dir_to_be_deleted"
+    d.mkdir()
+    assert os.path.exists(d)
+    result = dir.clean_up_folder_starting_with(tmp_path, "dir_to_be_deleted")
+    out, err = capsys.readouterr()
+    assert not os.path.exists(d)
+    assert result == True
+    assert err == ''
