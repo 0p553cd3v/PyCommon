@@ -70,7 +70,7 @@ jobs:
           ref: develop
       - name: Read TAG from develop as GH env
         id: newTag
-        run: echo "newTag=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_OUTPUT
+        run: echo "newTag=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_OUTPUT
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -104,7 +104,7 @@ jobs:
           ref: release
       - name: Set up Tag as GH env
         id: tag
-        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+        run: echo "TAG=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
