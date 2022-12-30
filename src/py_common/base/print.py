@@ -23,10 +23,10 @@ def print_line_separator_with_title(title, separator, line_length):
         print(separation_line)
     except ValueError as e:
         print("Wrong function input value: " + str(e))
-        sys.exit(1)
+        sys.exit(2)
     except TypeError as e:
         print("Wrong function input type: " + str(e))
-        sys.exit(1)
+        sys.exit(3)
     except Exception as e:
         print("Exception: " + str(e))
-        sys.exit(1)
+        sys.exit(100)
