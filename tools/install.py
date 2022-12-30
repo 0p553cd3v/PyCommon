@@ -43,5 +43,8 @@ if __name__ == "__main__":
     except subprocess.CalledProcessError as e:
         print(f"Installation failed: {e.returncode}")
         sys.exit(1)
+    except Exception as e:
+        print(f"Installation failed:  {e}")
+        sys.exit(100)    
     else:
         print('Installation finished - SUCCESS')

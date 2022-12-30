@@ -18,23 +18,20 @@ def main():
     #Changing directory to project config path
     os.chdir(project_config_path)
 
-    try:
-        #Run test command
-        print('Custom python packages installation started')
-        subprocess.check_call(
-            [
-                "sudo",
-                "python3",
-                "-m",
-                "pip",
-                "install",
-                "-r",
-                "./config/requirements.txt"
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        print(f"Custom python packages installation failed: {e.returncode}")
-        raise subprocess.CalledProcessError from e
+    #Run test command
+    print('Custom python packages installation started')
+    subprocess.check_call(
+        [
+            "sudo",
+            "python3",
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            "./config/requirements.txt"
+        ]
+    )
+    print('Custom python packages installation finished') 
     
 #Main function call
 if __name__ == "__main__":
@@ -43,5 +40,8 @@ if __name__ == "__main__":
     except subprocess.CalledProcessError as e:
         print(f"Environemnt setup failed: {e.returncode}")
         sys.exit(1)
+    except Exception as e:
+        print(f"Environemnt setup failed:  {e}")
+        sys.exit(100)      
     else:
         print('Environemnt setup finished - SUCCESS')

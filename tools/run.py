@@ -28,124 +28,85 @@ def main():
 
     #Run bandit security checker
     print.print_line_separator_with_title(" Bandit security checker ","-",100)
-    try:
-         
-        subprocess.check_call(
-            [
+    subprocess.check_call(
+        [
                 "tools/checkers/bandit_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+        ]
+    ) 
 
     #Run black formater 
     print.print_line_separator_with_title(" Black formatter ","-",100)
-    try:
-        
-        subprocess.check_call(
-            [
-                "tools/checkers/black_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/black_run.py",
+        ]
+    ) 
     
     #Run vulture checker    
     print.print_line_separator_with_title(" Vulture dead code checker ","-",100)
-    try:
-
-        subprocess.check_call(
-            [
-                "tools/checkers/vulture_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/vulture_run.py",
+        ]
+    ) 
 
     #Run lizard CCN analyzer 
     print.print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
-    try:
-        
-        subprocess.check_call(
-            [
-                "tools/checkers/lizard_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/lizard_run.py",
+        ]
+    ) 
 
     #Run pylint checker
     print.print_line_separator_with_title(" PyLint linter checker ","-",100)
-    try:
-         
-        subprocess.check_call(
-            [
-                "tools/checkers/pylint_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/pylint_run.py",
+        ]
+    ) 
 
     #Run unit tests
     print.print_line_separator_with_title(" Unit tests ","-",100)
-    try:
-        subprocess.check_call(
-            [
-                "tests/unit_tests/unit_tests_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tests/unit_tests/unit_tests_run.py",
+        ]
+    ) 
 
     #Run integration tests 
     print.print_line_separator_with_title(" Integration tests ","-",100)
-    try:
-        subprocess.check_call(
-            [
-                "tests/integration_tests/integration_tests_run.py",
-            ]
-        )
-    except subprocess.CalledProcessError as e:
-        print(f"Integration tests failed: {e.returncode}")
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tests/integration_tests/integration_tests_run.py",
+        ]
+    )
     
     #Run docstr coverage checker
     print.print_line_separator_with_title("docstr coverage checker ","-",100)
-    try:
-         
-        subprocess.check_call(
-            [
-                "tools/checkers/docstrcov_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/docstrcov_run.py",
+        ]
+    ) 
 
     #Run pyroma checker
     print.print_line_separator_with_title("pyroma package config checker ","-",100)
-    try:
-         
-        subprocess.check_call(
-            [
-                "tools/checkers/pyroma_run.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/checkers/pyroma_run.py",
+        ]
+    ) 
 
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
     print.print_line_separator_with_title("Build and test package ","-",100)
-    try:
-         
-        subprocess.check_call(
-            [
-                "tools/build_and_test.py",
-            ]
-        ) 
-    except subprocess.CalledProcessError as e:
-        raise subprocess.CalledProcessError from e
+    subprocess.check_call(
+        [
+            "tools/build_and_test.py",
+        ]
+    )
 
 #Main function call
 if __name__ == "__main__":
@@ -156,6 +117,6 @@ if __name__ == "__main__":
         sys.exit(1)
     except Exception as e:
         print(f"Run script failed:  {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('Run script finished - SUCCESS')

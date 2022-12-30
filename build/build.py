@@ -5,7 +5,6 @@
 #Imports
 import os
 import sys
-import shutil
 import subprocess
 
 #Adding path to sys to use local function defined in src folder
@@ -22,29 +21,24 @@ def main():
     #Changing directory to project config path
     os.chdir(project_config_path)
 
-    try:
-        #Run build command
-        print('Build - Build run')
-        subprocess.check_call(
-            [
-                "python3",
-                "-m",
-                "build",
-                "--sdist",
-                "--wheel",
-                "--outdir",
-                "dist/",
-            ]
-        ) 
+    #Run build command
+    print('Build - Build run')
+    subprocess.check_call(
+        [
+            "python3",
+            "-m",
+            "build",
+            "--sdist",
+            "--wheel",
+            "--outdir",
+            "dist/",
+        ]
+    ) 
+    #Run cleanup commands
+    print('Build - Cleanup run')
+    dir.clean_up_folder_starting_with("build","lib")
+    dir.clean_up_folder_starting_with("build","bdist")
 
-        #Run cleanup command
-        print('Build - Cleanup run')
-        path = os.path.join('build/lib','')
-        dir.clean_up_folder_starting_with("build","lib")
-        dir.clean_up_folder_starting_with("build","bdist")
-
-    except subprocess.CalledProcessError as e:
-        print(f"Build failed: {e.returncode}")
     
 #Main function call
 if __name__ == "__main__":
@@ -53,3 +47,8 @@ if __name__ == "__main__":
     except subprocess.CalledProcessError as e:
         print(f"Build failed: {e.returncode}")
         sys.exit(1)
+    except Exception as e:
+        print(f"Build failed:  {e}")
+        sys.exit(100)  
+    else:
+        print('Build finished - SUCCESS')    

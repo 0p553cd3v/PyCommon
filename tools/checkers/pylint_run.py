@@ -41,6 +41,6 @@ if __name__ == "__main__":
         main()
     except Exception as e:
         print(f"PyLint run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('PyLint run finished - SUCCESS')
