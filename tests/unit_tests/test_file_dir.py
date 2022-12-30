@@ -49,3 +49,39 @@ def test_create_dir_when_user_has_no_edit_permission(tmp_path):
         ]
     ) 
 
+def test_clean_up_folder_starting_with(tmp_path, capsys):
+    '''Simple test to assert if folder cleanup based on prefix works'''
+    d = tmp_path / "dir_to_be_deleted"
+    d.mkdir()
+    assert os.path.exists(d)
+    result = dir.clean_up_folder_starting_with(tmp_path, "dir")
+    out, err = capsys.readouterr()
+    assert not os.path.exists(d)
+    assert result == True
+    assert err == ''
+
+def test_clean_up_folder_starting_with_when_not_empty(tmp_path, capsys):
+    '''Simple test to assert if folder cleanup based on prefix works, when directory not empty'''
+    d = tmp_path / "dir_to_be_deleted"
+    d.mkdir()
+    os.chdir(d)
+    with open('file.txt', 'w') as f:
+        f.write('New file insid direcotry to be deleted!')
+    assert os.path.exists(d)
+    assert os.path.exists(os.path.join(d,'file.txt'))
+    result = dir.clean_up_folder_starting_with(tmp_path, "dir")
+    out, err = capsys.readouterr()
+    assert not os.path.exists(d)
+    assert result == True
+    assert err == ''
+
+def test_clean_up_folder_starting_with_when_bad_prefix(tmp_path, capsys):
+    '''Simple test to assert if folder cleanup based on prefix works'''
+    d = tmp_path / "dir_to_be_deleted"
+    d.mkdir()
+    assert os.path.exists(d)
+    with pytest.raises(Exception) as exc_info:
+        dir.clean_up_folder_starting_with(tmp_path, "bad_dir")
+    assert os.path.exists(d)
+    assert exc_info.type == Exception
+    assert exc_info.value.args[0] == 'Prefix not matching to any folder'

@@ -34,10 +34,7 @@ def clean_up_folder_starting_with(directory, prefix):
     for item in os.listdir(directory):
         path = os.path.join(directory, item)
         if item.startswith(prefix):
-            if os.path.isfile(path):
-                os.remove(path)
-            elif os.path.isdir(os.path.join(directory, item)):
-                shutil.rmtree(path)
-            else:
-                raise Exception("No folder prefix match")
+            shutil.rmtree(path)
+        else:
+            raise Exception("Prefix not matching to any folder")
     return True
