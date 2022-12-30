@@ -8,7 +8,7 @@ import sys
 import subprocess
 
 def main():
-
+    '''Main function to run script'''
     #Print script start notification
     print('Docstring coverage run started')
 

@@ -10,7 +10,8 @@ import subprocess
 
 #Main function def
 def main():
-    #Finding build path based on build.py script location
+    ''''Main function to run script'''
+    #Finding build path based on install.py script location
     file_path = os.path.dirname(__file__)
     build_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 

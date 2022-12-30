@@ -10,7 +10,7 @@ import subprocess
 from pylint.lint import Run
 
 def main():
-
+    '''Main function to run script'''
     #Print script start notification
     print('PyLint run started')
 

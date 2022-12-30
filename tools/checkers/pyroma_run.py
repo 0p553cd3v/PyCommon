@@ -9,7 +9,7 @@ import yaml
 import subprocess
 
 def main():
-
+    '''Main function to run script'''
     #Print script start notification
     print('pyroma run started')
 
