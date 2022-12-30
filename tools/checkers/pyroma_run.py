@@ -27,7 +27,7 @@ def main():
     #Define score value for a checker to accept code
     min_score = ENV['PYROMA_MIN']
 
-    #Run vulture command
+    #Run pyroma command
 
     subprocess.check_call(
         [

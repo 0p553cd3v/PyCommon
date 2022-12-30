@@ -108,6 +108,14 @@ def main():
         ]
     )
 
+    #Run dccoumentation builder script
+    prints.print_line_separator_with_title("Generate documentation ","-",100)
+    subprocess.check_call(
+        [
+            "docs/gen_doc.py",
+        ]
+    )
+
 #Main function call
 if __name__ == "__main__":
     try:
