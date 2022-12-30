@@ -2,6 +2,61 @@
 requires = ['setuptools>=42']
 build-backend = 'setuptools.build_meta'
 
+[project]
+name = "opssecdev_pycommon"
+version = "0.0.2"
+description = "Python common modles library for system administration"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = [ 
+    "common",
+    "library",
+    "admin",
+    "devops"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Natural Language :: English",
+    "Framework :: Pytest",
+    "Framework :: tox",
+    "Development Status :: 2 - Pre-Alpha"
+]
+dynamic = [
+    "dependencies"
+]
+
+[[project.authors]]
+name = "0p553cd3v"
+email = "0p553cd3v@gmail.com"
+
+[project.urls]
+Homepage = "https://github.com/0p553cd3v/Python-common-lib"
+"Issue Tracker" = "https://github.com/0p553cd3v/Python-common-lib/issues"
+"Source Code" = "https://github.com/0p553cd3v/Python-common-lib"
+#Documentation = ""
+
+[project.license]
+file = "LICENSE"
+
+[tool.setuptools.packages.find]
+where = ["src"]  
+exclude = [
+    "tests*",
+    "build*",
+    "dist*",
+    "tools*",
+    "docs*",
+    "config*"
+] 
+namespaces = false 
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["config/requirements.txt"]}
+
+
 [tool.black]
 line-length = 120
 target-version = ['py311']
@@ -26,3 +81,441 @@ skips = []
 
 [tool.pydocstyle]
 ignore = 'D104'
+
+[tool.pylint.main]
+# analyse-fallback-blocks =
+# exit-zero =
+# extension-pkg-allow-list =
+# extension-pkg-whitelist =
+# fail-on =.
+fail-under = 10.0
+# from-stdin =
+ignore = ["CVS"]
+# ignore-paths =
+# ignore-patterns =
+# ignored-modules =
+# init-hook =
+jobs = 1
+limit-inference-results = 100
+# load-plugins =
+persistent = true
+py-version = "3.10"
+# recursive =
+suggestion-mode = true
+# unsafe-load-any-extension =
+
+[tool.pylint.basic]
+argument-naming-style = "snake_case"
+# argument-rgx =
+attr-naming-style = "snake_case"
+# attr-rgx =
+bad-names = [
+    "foo",
+    "bar",
+    "baz",
+    "toto",
+    "tutu",
+    "tata",
+    "tmp",
+    "blabla"
+]
+# bad-names-rgxs =
+class-attribute-naming-style = "any"
+# class-attribute-rgx =
+class-const-naming-style = "UPPER_CASE"
+# class-const-rgx =
+class-naming-style = "PascalCase"
+# class-rgx =
+const-naming-style = "UPPER_CASE"
+# const-rgx =
+docstring-min-length = -1
+function-naming-style = "snake_case"
+# function-rgx =
+good-names = [
+    "i",
+    "j",
+    "k",
+    "ex",
+    "Run",
+    "_"
+]
+# good-names-rgxs =
+# include-naming-hint =
+inlinevar-naming-style = "any"
+# inlinevar-rgx =
+method-naming-style = "snake_case"
+# method-rgx =
+module-naming-style = "snake_case"
+# module-rgx =
+# name-group =
+no-docstring-rgx = "^_"
+property-classes = ["abc.abstractproperty"]
+# typevar-rgx =
+variable-naming-style = "snake_case"
+# variable-rgx =
+
+[tool.pylint.classes]
+# check-protected-access-in-special-methods =
+defining-attr-methods = [
+    "__init__",
+    "__new__",
+    "setUp",
+    "__post_init__"
+]
+exclude-protected = [
+    "_asdict",
+    "_fields",
+    "_replace",
+    "_source",
+    "_make"
+]
+valid-classmethod-first-arg = ["cls"]
+valid-metaclass-classmethod-first-arg = ["cls"]
+
+[tool.pylint.design]
+# exclude-too-few-public-methods =
+# ignored-parents =
+max-args = 5
+max-attributes = 7
+max-bool-expr = 5
+max-branches = 12
+max-locals = 15
+max-parents = 7
+max-public-methods = 20
+max-returns = 6
+max-statements = 50
+min-public-methods = 2
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = [
+    "BaseException",
+    "Exception"
+]
+
+[tool.pylint.format]
+# expected-line-ending-format =
+ignore-long-lines = "^\\s*(# )?<?https?://\\S+>?$"
+indent-after-paren = 4
+indent-string = "    "
+max-line-length = 100
+max-module-lines = 1000
+# single-line-class-stmt =
+# single-line-if-stmt =
+
+[tool.pylint.imports]
+# allow-any-import-level =
+# allow-wildcard-with-all =
+# deprecated-modules =
+# ext-import-graph =
+# import-graph =
+# int-import-graph =
+# known-standard-library =
+known-third-party = ["enchant"]
+# preferred-modules =
+
+[tool.pylint.logging]
+logging-format-style = "old"
+logging-modules = ["logging"]
+
+[tool.pylint."messages control"]
+confidence = [
+    "HIGH",
+    "CONTROL_FLOW",
+    "INFERENCE",
+    "INFERENCE_FAILURE",
+    "UNDEFINED"
+]
+disable = [
+    "locally-disabled",
+    "file-ignored",
+    "suppressed-message",
+    "use-symbolic-message-instead",
+    "bad-indentation",
+    "consider-using-f-string",
+    "duplicate-code",
+    "fixme",
+    "global-statement",
+    "invalid-name",
+    "no-else-return",
+    "too-few-public-methods",
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-branches",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-public-methods",
+    "too-many-return-statements",
+    "ungrouped-imports",
+    "unspecified-encoding",
+    "unused-wildcard-import",
+    "use-maxsplit-arg",
+    "logging-fstring-interpolation"
+]
+enable = [
+    "raw-checker-failed",
+    "bad-inline-option",
+    "useless-suppression",
+    "deprecated-pragma",
+    "c-extension-no-member",
+    "disallowed-name", 
+    "line-too-long",
+    "abstract-class-instantiated",
+    "abstract-method",
+    "access-member-before-definition",
+    "anomalous-backslash-in-string",
+    "anomalous-unicode-escape-in-string",
+    "arguments-differ",
+    "assert-on-tuple",
+    "assigning-non-slot",
+    "assignment-from-no-return",
+    "assignment-from-none",
+    "attribute-defined-outside-init",
+    "bad-except-order",
+    "bad-format-character",
+    "bad-format-string-key",
+    "bad-format-string",
+    "bad-open-mode",
+    "bad-reversed-sequence",
+    "bad-staticmethod-argument",
+    "bad-str-strip-call",
+    "bad-super-call",
+    "binary-op-exception",
+    "boolean-datetime",
+    "catching-non-exception",
+    "cell-var-from-loop",
+    "confusing-with-statement",
+    "continue-in-finally",
+    "dangerous-default-value",
+    "duplicate-argument-name",
+    "duplicate-bases",
+    "duplicate-except",
+    "duplicate-key",
+    "expression-not-assigned",
+    "format-combined-specification",
+    "format-needs-mapping",
+    "function-redefined",
+    "global-variable-undefined",
+    "import-error",
+    "import-self",
+    "inconsistent-mro",
+    "inherit-non-class",
+    "init-is-generator",
+    "invalid-all-object",
+    "invalid-format-index",
+    "invalid-length-returned",
+    "invalid-sequence-index",
+    "invalid-slice-index",
+    "invalid-slots-object",
+    "invalid-slots",
+    "invalid-unary-operand-type",
+    "logging-too-few-args",
+    "logging-too-many-args", 
+    "logging-unsupported-format",
+    "lost-exception",
+    "method-hidden",
+    "misplaced-bare-raise",
+    "misplaced-future",
+    "missing-format-argument-key",
+    "missing-format-attribute",
+    "missing-format-string-key",
+    "no-member",
+    "no-method-argument",
+    "no-name-in-module",
+    "no-self-argument",
+    "no-value-for-parameter",
+    "non-iterator-returned",
+    "nonexistent-operator",
+    "not-a-mapping",
+    "not-an-iterable",
+    "not-callable",
+    "not-context-manager",
+    "not-in-loop",
+    "pointless-statement",
+    "pointless-string-statement",
+    "raising-bad-type",
+    "raising-non-exception",
+    "redefined-builtin",
+    "redefined-outer-name",
+    "redundant-keyword-arg",
+    "repeated-keyword",
+    "return-arg-in-generator",
+    "return-in-init",
+    "return-outside-function",
+    "signature-differs",
+    "super-init-not-called",
+    "syntax-error",
+    "too-few-format-args",
+    "too-many-format-args",
+    "too-many-function-args",
+    "truncated-format-string",
+    "undefined-all-variable",
+    "undefined-loop-variable",
+    "undefined-variable",
+    "unexpected-keyword-arg",
+    "unexpected-special-method-signature",
+    "unpacking-non-sequence",
+    "unreachable",
+    "unsubscriptable-object",
+    "unsupported-binary-operation",
+    "unsupported-membership-test",
+    "unused-format-string-argument",
+    "unused-format-string-key",
+    "used-before-assignment",
+    "using-constant-test",
+    "yield-outside-function",
+    "astroid-error",
+    "fatal",
+    "method-check-failed",
+    "parse-error",
+    "empty-docstring",
+    "invalid-characters-in-docstring",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "wrong-spelling-in-comment",
+    "wrong-spelling-in-docstring",
+    "unused-argument",
+    "unused-import",
+    "unused-variable",
+    "eval-used",
+    "exec-used",
+    "bad-classmethod-argument",
+    "bad-mcs-classmethod-argument",
+    "bad-mcs-method-argument",
+    "bare-except",
+    "broad-except",
+    "consider-iterating-dictionary",
+    "consider-using-enumerate",
+    "global-at-module-level",
+    "global-variable-not-assigned",
+    "logging-format-interpolation",
+    "logging-not-lazy",
+    "multiple-imports",
+    "multiple-statements",
+    "no-classmethod-decorator",
+    "no-staticmethod-decorator",
+    "protected-access",
+    "redundant-unittest-assert",
+    "reimported",
+    "simplifiable-if-statement",
+    "singleton-comparison",
+    "superfluous-parens",
+    "unidiomatic-typecheck",
+    "unnecessary-lambda",
+    "unnecessary-pass",
+    "unnecessary-semicolon",
+    "unneeded-not",
+    "useless-else-on-loop",
+    "deprecated-method",
+    "deprecated-module",
+    "too-many-boolean-expressions", 
+    "too-many-nested-blocks",
+    "too-many-statements",
+    "wildcard-import",
+    "wrong-import-order",
+    "wrong-import-position",
+    "missing-final-newline",
+    "mixed-line-endings",
+    "trailing-newlines",
+    "trailing-whitespace",
+    "unexpected-line-ending-format",
+    "useless-option-value",
+    "unknown-option-value",
+    "unrecognized-inline-option"
+]
+
+[tool.pylint.method_args]
+timeout-methods = [
+    "requests.api.delete",
+    "requests.api.get",
+    "requests.api.head",
+    "requests.api.options",
+    "requests.api.patch",
+    "requests.api.post",
+    "requests.api.put",
+    "requests.api.request"
+]
+
+[tool.pylint.miscellaneous]
+notes = [
+    "FIXME",
+    "XXX",
+    "TODO"
+    ]
+# notes-rgx =
+
+[tool.pylint.refactoring]
+max-nested-blocks = 5
+never-returning-functions = [
+    "sys.exit",
+    "argparse.parse_error"
+]
+
+[tool.pylint.reports]
+evaluation = "10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)"
+# msg-template =
+# output-format =
+# reports =
+score = true
+
+[tool.pylint.similarities]
+ignore-comments = true
+ignore-docstrings = true
+# ignore-imports =
+# ignore-signatures =
+min-similarity-lines = 4
+
+[tool.pylint.spelling]
+max-spelling-suggestions = 4
+# spelling-dict =
+spelling-ignore-comment-directives = "fmt: on,fmt: off,noqa:,noqa,nosec,isort:skip,mypy:"
+# spelling-ignore-words =
+# spelling-private-dict-file =
+# spelling-store-unknown-words =
+
+[tool.pylint.string]
+# check-quote-consistency =
+# check-str-concat-over-line-jumps =
+
+[tool.pylint.typecheck]
+contextmanager-decorators = ["contextlib.contextmanager"]
+# generated-members =
+ignore-none = true
+ignore-on-opaque-inference = true
+ignored-checks-for-mixins = [
+    "no-member",
+    "not-async-context-manager",
+    "not-context-manager",
+    "attribute-defined-outside-init"
+]
+ignored-classes = [
+    "optparse.Values",
+    "thread._local",
+    "_thread._local"
+]
+missing-member-hint = true
+missing-member-hint-distance = 1
+missing-member-max-choices = 1
+mixin-class-rgx = ".*[Mm]ixin"
+# signature-mutators =
+
+[tool.pylint.variables]
+# additional-builtins =
+allow-global-unused-variables = true
+# allowed-redefined-builtins =
+callbacks = [
+    "cb_",
+    "_cb"
+]
+dummy-variables-rgx = "_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_"
+ignored-argument-names = "_.*|^ignored_|^unused_"
+# init-import =
+redefining-builtins-modules = [
+    "six.moves",
+    "past.builtins",
+    "future.builtins",
+    "builtins",
+    "io"
+]
+

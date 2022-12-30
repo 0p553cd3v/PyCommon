@@ -7,6 +7,11 @@ import os
 import sys
 import subprocess
 
+#Adding path to sys to use local function defined in src folder
+sys.path.append("src")
+from py_common.file import dir
+
+
 #Main function def
 def main():
     #Finding build path based on build.py script location
@@ -17,28 +22,23 @@ def main():
     os.chdir(project_config_path)
 
     #Run build command
-    print('Build - Build run')
-    subprocess.check_call(
-        [
-            "python3",
-            "-m",
-            "build",
-            "--sdist",
-            "--wheel",
-            "--outdir",
-            "dist/",
-        ]
-    ) 
+    print('Cleanup run')
+
+    #Run cleanup commands
+    print('Cleanup - Build artifacts')
+    dir.clean_up_folder_starting_with("build","lib")
+    dir.clean_up_folder_starting_with("build","bdist")
+
     
 #Main function call
 if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Build failed: {e.returncode}")
+        print(f"Cleanup failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Build failed:  {e}")
+        print(f"Cleanup failed:  {e}")
         sys.exit(100)  
     else:
-        print('Build finished - SUCCESS')    
+        print('Cleanup finished - SUCCESS')    
