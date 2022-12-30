@@ -13,7 +13,7 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.base import print
+from py_common.base import prints
 
 #Main function def
 def main():
@@ -27,7 +27,7 @@ def main():
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
 
     #Run bandit security checker
-    print.print_line_separator_with_title(" Bandit security checker ","-",100)
+    prints.print_line_separator_with_title(" Bandit security checker ","-",100)
     subprocess.check_call(
         [
                 "tools/checkers/bandit_run.py",
@@ -35,7 +35,7 @@ def main():
     ) 
 
     #Run black formater 
-    print.print_line_separator_with_title(" Black formatter ","-",100)
+    prints.print_line_separator_with_title(" Black formatter ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/black_run.py",
@@ -43,7 +43,7 @@ def main():
     ) 
     
     #Run vulture checker    
-    print.print_line_separator_with_title(" Vulture dead code checker ","-",100)
+    prints.print_line_separator_with_title(" Vulture dead code checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/vulture_run.py",
@@ -51,7 +51,7 @@ def main():
     ) 
 
     #Run lizard CCN analyzer 
-    print.print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
+    prints.print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/lizard_run.py",
@@ -59,7 +59,7 @@ def main():
     ) 
 
     #Run pylint checker
-    print.print_line_separator_with_title(" PyLint linter checker ","-",100)
+    prints.print_line_separator_with_title(" PyLint linter checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/pylint_run.py",
@@ -67,7 +67,7 @@ def main():
     ) 
 
     #Run unit tests
-    print.print_line_separator_with_title(" Unit tests ","-",100)
+    prints.print_line_separator_with_title(" Unit tests ","-",100)
     subprocess.check_call(
         [
             "tests/unit_tests/unit_tests_run.py",
@@ -75,7 +75,7 @@ def main():
     ) 
 
     #Run integration tests 
-    print.print_line_separator_with_title(" Integration tests ","-",100)
+    prints.print_line_separator_with_title(" Integration tests ","-",100)
     subprocess.check_call(
         [
             "tests/integration_tests/integration_tests_run.py",
@@ -83,7 +83,7 @@ def main():
     )
     
     #Run docstr coverage checker
-    print.print_line_separator_with_title("docstr coverage checker ","-",100)
+    prints.print_line_separator_with_title("docstr coverage checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/docstrcov_run.py",
@@ -91,7 +91,7 @@ def main():
     ) 
 
     #Run pyroma checker
-    print.print_line_separator_with_title("pyroma package config checker ","-",100)
+    prints.print_line_separator_with_title("pyroma package config checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/pyroma_run.py",
@@ -101,7 +101,7 @@ def main():
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
-    print.print_line_separator_with_title("Build and test package ","-",100)
+    prints.print_line_separator_with_title("Build and test package ","-",100)
     subprocess.check_call(
         [
             "tools/build_and_test.py",
