@@ -7,13 +7,9 @@ import os
 import sys
 import subprocess
 
-#Adding path to sys to use local function defined in src folder
-sys.path.append("src")
-from py_common.file import dir
-
-
 #Main function def
 def main():
+    '''Main function to run script'''
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
@@ -34,11 +30,6 @@ def main():
             "dist/",
         ]
     ) 
-    #Run cleanup commands
-    print('Build - Cleanup run')
-    dir.clean_up_folder_starting_with("build","lib")
-    dir.clean_up_folder_starting_with("build","bdist")
-
     
 #Main function call
 if __name__ == "__main__":

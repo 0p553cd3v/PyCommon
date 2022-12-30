@@ -9,7 +9,7 @@ import yaml
 import subprocess
 
 def main():
-
+    '''Main function to run script'''
     #Print script start notification
     print('Docstring coverage run started')
 
@@ -34,7 +34,7 @@ def main():
             "docstr-coverage",
             "./src",
             "./tools",
-            "./build",
+            "./build/build.py",
             "--fail-under=" + str(min_score),
             "-i", #ignore __init__ files
             "-P", #skip private functions

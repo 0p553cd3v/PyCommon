@@ -10,7 +10,7 @@ import yaml
 
 #Main function def
 def main():
-    
+    '''Main function to run script'''
     #Print script start notification
     print('PyTest run started - Unit tests')
 

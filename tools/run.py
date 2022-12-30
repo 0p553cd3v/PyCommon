@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Run all script (including code checkers, unit and integration tests, build and tests against package)
+Run all script (including code checkers, unit and integration tests, build and tests against package and generate documentation)
 """
 
 #Imports
@@ -17,6 +17,7 @@ from py_common.base import prints
 
 #Main function def
 def main():
+    ''''Main function to run script'''
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
@@ -83,7 +84,7 @@ def main():
     )
     
     #Run docstr coverage checker
-    prints.print_line_separator_with_title("docstr coverage checker ","-",100)
+    prints.print_line_separator_with_title(" docstr coverage checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/docstrcov_run.py",
@@ -91,7 +92,7 @@ def main():
     ) 
 
     #Run pyroma checker
-    prints.print_line_separator_with_title("pyroma package config checker ","-",100)
+    prints.print_line_separator_with_title(" pyroma package config checker ","-",100)
     subprocess.check_call(
         [
             "tools/checkers/pyroma_run.py",
@@ -101,7 +102,7 @@ def main():
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
-    prints.print_line_separator_with_title("Build and test package ","-",100)
+    prints.print_line_separator_with_title(" Build and test package ","-",100)
     subprocess.check_call(
         [
             "tools/build_and_test.py",
@@ -109,10 +110,18 @@ def main():
     )
 
     #Run dccoumentation builder script
-    prints.print_line_separator_with_title("Generate documentation ","-",100)
+    prints.print_line_separator_with_title(" Generate documentation ","-",100)
     subprocess.check_call(
         [
             "docs/gen_doc.py",
+        ]
+    )
+
+    #Run cleaunup script
+    prints.print_line_separator_with_title(" Cleanup artifacts ","-",100)
+    subprocess.check_call(
+        [
+            "tools/cleanup.py",
         ]
     )
 

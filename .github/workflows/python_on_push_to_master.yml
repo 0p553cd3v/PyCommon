@@ -58,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Tag as GH env
-        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+        run: echo "TAG=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_ENV
       - uses: actions/checkout@v3
       - uses: rickstaa/action-create-tag@v1
         with:
@@ -74,7 +74,7 @@ jobs:
           ref: master
       - name: Read Tag as GH env
         id: tag
-        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+        run: echo "TAG=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
