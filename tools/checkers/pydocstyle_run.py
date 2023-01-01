@@ -19,7 +19,7 @@ def main():
     #Changing directory to project config path
     os.chdir(project_config_path)
 
-    #Run pydockstyle command
+    #Run pydocstyle command
 
     subprocess.check_call(
         [
@@ -36,10 +36,10 @@ if __name__ == "__main__":
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Pydockstyle run failed: {e.returncode}")
+        print(f"Pydocstyle run failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Pydockstyle run failed: {e}")
+        print(f"Pydocstyle run failed: {e}")
         sys.exit(100)
     else:
-        print('Pydockstyle run finished - SUCCESS')   
+        print('Pydocstyle run finished - SUCCESS')   

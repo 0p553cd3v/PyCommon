@@ -91,6 +91,14 @@ def main():
         ]
     ) 
 
+   #Run docstr coverage checker
+    prints.print_line_separator_with_title(" pydockstyle checker ","-",100)
+    subprocess.check_call(
+        [
+            "tools/checkers/pydocstyle_run.py",
+        ]
+    ) 
+
     #Run pyroma checker
     prints.print_line_separator_with_title(" pyroma package config checker ","-",100)
     subprocess.check_call(
