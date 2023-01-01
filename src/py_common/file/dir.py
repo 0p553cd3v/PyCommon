@@ -1,6 +1,4 @@
-"""
-Standard operations on paths
-"""
+"""Dir module."""
 
 # Imports
 import os
@@ -8,7 +6,7 @@ import shutil
 
 # Functions
 def create_dir_if_not_exist(path):
-    """Standard mkdir extended fith exception handling"""
+    """Standard mkdir extended fith exception handling."""
     # Check if folder exists
     if not os.path.exists(path):
         try:
@@ -30,7 +28,7 @@ def create_dir_if_not_exist(path):
 
 
 def clean_up_folder_starting_with(directory, prefix):
-    """Function to recursively clean a folder on a direcotry which name starts with prefix"""
+    """Function to recursively clean a folder on a direcotry which name starts with prefix."""
     found = False
     for item in os.listdir(directory):
         path = os.path.join(directory, item)

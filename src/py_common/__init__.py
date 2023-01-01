@@ -1,2 +1,1 @@
-"""PyCommon package
-"""
+"""PyCommon package."""
