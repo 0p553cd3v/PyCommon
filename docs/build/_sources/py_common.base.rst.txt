@@ -1,6 +1,11 @@
 py\_common.base package
 =======================
 
+.. automodule:: py_common.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -9,11 +14,3 @@ Submodules
 
    py_common.base.hello_world
    py_common.base.prints
-
-Module contents
----------------
-
-.. automodule:: py_common.base
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,6 +1,11 @@
 py\_common.path package
 =======================
 
+.. automodule:: py_common.path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -8,11 +13,3 @@ Submodules
    :maxdepth: 4
 
    py_common.path.path
-
-Module contents
----------------
-
-.. automodule:: py_common.path
-   :members:
-   :undoc-members:
-   :show-inheritance:

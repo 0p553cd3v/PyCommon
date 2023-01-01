@@ -1,6 +1,11 @@
 py\_common package
 ==================
 
+.. automodule:: py_common
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -11,11 +16,3 @@ Subpackages
    py_common.file
    py_common.logger
    py_common.path
-
-Module contents
----------------
-
-.. automodule:: py_common
-   :members:
-   :undoc-members:
-   :show-inheritance:

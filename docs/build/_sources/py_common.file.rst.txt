@@ -1,6 +1,11 @@
 py\_common.file package
 =======================
 
+.. automodule:: py_common.file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -8,11 +13,3 @@ Submodules
    :maxdepth: 4
 
    py_common.file.dir
-
-Module contents
----------------
-
-.. automodule:: py_common.file
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -8,8 +8,6 @@ Welcome to PyCommon's documentation!
    readme
    modules
 
-
-
 Indices and tables
 ==================
 

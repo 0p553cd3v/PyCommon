@@ -45,11 +45,20 @@
 <span class="sd">Custom print functions to print predefined schemas</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+
 <span class="c1"># Imports</span>
 
 <span class="c1"># Function definitions</span>
 <div class="viewcode-block" id="print_line_separator_with_title"><a class="viewcode-back" href="../../../py_common.base.prints.html#py_common.base.prints.print_line_separator_with_title">[docs]</a><span class="k">def</span> <span class="nf">print_line_separator_with_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">line_length</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Function to print separation line with some title inside&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Function to print separation line with some title inside</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: &quot;Separator length not equal to 1&quot; when spearator is longer than one sign</span>
+<span class="sd">        Exception: &quot;Title length greater than line_length&quot; when text to be added is longer than separator it self</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Error codes where 0 if sucedded</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Separator length not equal to 1&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">line_length</span><span class="p">:</span>

@@ -5,11 +5,9 @@
 #Imports
 import os
 import sys
-import yaml
 import subprocess
 
 def main():
-    '''Main function to run script'''
     #Print script start notification
     print('Sfinx run started')
 
@@ -25,6 +23,9 @@ def main():
         [
             "sphinx-apidoc",
             "-e",
+            "-E",
+            "-M",
+            "-f",
             "-o",
             "docs/src",
             "src",
