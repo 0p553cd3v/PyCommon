@@ -4,8 +4,8 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.2"
-description = "Python common modles library for system administration"
+version = "0.0.3"
+description = "Python common modules library for system administration"
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = [ 

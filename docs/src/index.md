@@ -1,20 +1,17 @@
-.. PyCommon documentation master file, created by
-   sphinx-quickstart on Fri Dec 30 15:03:54 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to PyCommon's documentation!
-====================================
-
+# Welcome to PyCommon's documentation!
+```{eval-rst}
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:
 
+   readme
+   package
+```
 
 
-Indices and tables
-==================
-
+# Indices and tables
+```{eval-rst}
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+```
