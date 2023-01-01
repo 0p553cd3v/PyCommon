@@ -36,7 +36,7 @@ def clean_up_folder_starting_with(directory, prefix):
         path = os.path.join(directory, item)
         if item.startswith(prefix):
             shutil.rmtree(path)
-            found=True
+            found = True
     if found is not True:
         print(f"SKIP: Prefix: {prefix} not matching to any folder in directory: {directory}")
     return True
