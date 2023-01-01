@@ -21,12 +21,25 @@ def main():
     os.chdir(project_config_path)
 
     #Run dock generation command
+    subprocess.check_call(
+        [
+            "sphinx-apidoc",
+            "-e",
+            "-o",
+            "docs/src",
+            "src",
+        ]
+    ) 
 
     subprocess.check_call(
         [
-            "make",
-            "-C./docs",
-            "html"
+            "sphinx-build",
+            "-T",
+            #"-W",
+            "-b",
+            "html",
+            "docs/src",
+            "docs/build",
         ]
     ) 
 

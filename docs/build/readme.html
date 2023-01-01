@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Readme &#8212; PyCommon 0.0.3 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="src" href="modules.html" />
+    <link rel="prev" title="Welcome to PyCommon’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="src"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PyCommon’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PyCommon 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Readme</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="readme">
+<h1>Readme<a class="headerlink" href="#readme" title="Permalink to this heading">¶</a></h1>
+<section id="project-title">
+<h2>Project title<a class="headerlink" href="#project-title" title="Permalink to this heading">¶</a></h2>
+<p>Python Common Lib</p>
+</section>
+<section id="introduction-the-projects-aim">
+<h2>Introduction - the project’s aim<a class="headerlink" href="#introduction-the-projects-aim" title="Permalink to this heading">¶</a></h2>
+<p>Aim of the project is to prepare set of common libraries for python projects</p>
+</section>
+<section id="technologies">
+<h2>Technologies<a class="headerlink" href="#technologies" title="Permalink to this heading">¶</a></h2>
+<p>Project is created with:</p>
+<ul class="simple">
+<li><p>Python3.10</p></li>
+<li><p>Pytest</p></li>
+<li><p>Tox</p></li>
+</ul>
+</section>
+<section id="hardware">
+<h2>Hardware<a class="headerlink" href="#hardware" title="Permalink to this heading">¶</a></h2>
+<p>Following hardware setup is used for the project:</p>
+<ul class="simple">
+<li><p>n/a</p></li>
+</ul>
+</section>
+<section id="prerequisities">
+<h2>Prerequisities<a class="headerlink" href="#prerequisities" title="Permalink to this heading">¶</a></h2>
+<p>To run this project following prerequisites have to be fulfilled:</p>
+<ul class="simple">
+<li><p>Python3 has to be installed</p></li>
+<li><p>Tox has to be installed</p></li>
+<li><p>Pytest has to be installed</p></li>
+</ul>
+</section>
+<section id="install-instalation-from-source-code">
+<h2>Install (Instalation from source code)<a class="headerlink" href="#install-instalation-from-source-code" title="Permalink to this heading">¶</a></h2>
+<p>To run this project, make following instructions:</p>
+<ul class="simple">
+<li><p>Create folder for code in user folder</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir Git &amp;&amp; cd $_
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Download git repository</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/0p553cd3v/PyCommon
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Go to repo dir</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd PyCommon
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>(Optional) Run tests and code checkers</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 tools/run.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Build package
+Simply run</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 build/build.py
+</pre></div>
+</div>
+<p>or if you want to performe build and verification over build package</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 tools/build_and_test.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install package</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 tools/install.py
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Import necessary functions using</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="kn">import</span> <span class="nn">py_common</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="kn">from</span> <span class="nn">py_common.module</span> <span class="kn">import</span> <span class="n">module_file_name</span>
+</pre></div>
+</div>
+</section>
+<section id="install-instalation-from-pypi">
+<h2>Install (Instalation from PyPI)<a class="headerlink" href="#install-instalation-from-pypi" title="Permalink to this heading">¶</a></h2>
+<p>TODO</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Readme</a><ul>
+<li><a class="reference internal" href="#project-title">Project title</a></li>
+<li><a class="reference internal" href="#introduction-the-projects-aim">Introduction - the project’s aim</a></li>
+<li><a class="reference internal" href="#technologies">Technologies</a></li>
+<li><a class="reference internal" href="#hardware">Hardware</a></li>
+<li><a class="reference internal" href="#prerequisities">Prerequisities</a></li>
+<li><a class="reference internal" href="#install-instalation-from-source-code">Install (Instalation from source code)</a></li>
+<li><a class="reference internal" href="#install-instalation-from-pypi">Install (Instalation from PyPI)</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Welcome to PyCommon’s documentation!</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modules.html"
+                          title="next chapter">src</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/readme.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="src"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PyCommon’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PyCommon 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Readme</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, 0p553cd3v.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    </div>
+  </body>
+</html>
