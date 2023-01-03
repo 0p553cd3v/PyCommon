@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run vulture checker for dead code"""
+"""Script to run vulture checker for dead code."""
 
 #Imports
 import os
@@ -8,7 +8,7 @@ import sys
 import subprocess
 
 def main():
-
+    """Run the script."""
     #Print script start notification
     print('Vulture run started')
 
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         sys.exit(1)
     except Exception as e:
         print(f"Vulture run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('Vulture run finished - SUCCESS')
 

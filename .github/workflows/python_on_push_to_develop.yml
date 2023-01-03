@@ -30,42 +30,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Install dependencies
+      - name: Install dependencies and setup enviroment
         run: |
-          python -m pip install --upgrade pip
-          pip install build
-          pip install pytest
-          pip install pytest-cov
-          pip install bandit
-          pip install black
-          pip install lizard
-          pip install pylint
-          pip install pyroma
-          pip install vulture
-      - name: Run security checker
+          python3 tools/env_setup.py
+      - name: Run 
         run: |
-          python3 tools/checkers/bandit_run.py
-      - name: Run code formater
-        run: |
-          python3 tools/checkers/black_run.py
-      - name: Run dead code checker
-        run: |
-          python3 tools/checkers/vulture_run.py
-      - name: Run cyclomatix complexity analyzer
-        run: |
-          python3 tools/checkers/lizard_run.py
-      - name: Run linter
-        run: |
-          python3 tools/checkers/pylint_run.py
-      - name: Run pyroma to check package standards
-        run: |
-          python3 tools/checkers/pyroma_run.py
-      - name: Install pypa/build
-        run: >-
-          python -m
-          pip install
-          build
-          --user
+          python3 tools/run.py
       - name: Build a binary wheel and a source tarball
         run: >-
           python3 build/build.py
@@ -92,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: delete_old_branch
     outputs:
-      rcExist: ${{ steps.checkTag.outputs.rcExist }}
+      rcExist: ${{ steps.setVar.outputs.rcExist }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -100,7 +70,7 @@ jobs:
           ref: develop
       - name: Read TAG from develop as GH env
         id: newTag
-        run: echo "newTag=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_OUTPUT
+        run: echo "newTag=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_OUTPUT
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -109,12 +79,14 @@ jobs:
         id: checkTag
         with: 
           tag: "RC_${{ steps.newTag.outputs.newTag }}"
-      - run: echo "rcExist=${{ steps.checkTag.outputs.exists }}" >> $GITHUB_OUTPUT
+      - name: Write variable
+        id: setVar
+        run: echo "rcExist=${{ steps.checkTag.outputs.exists }}" >> $GITHUB_OUTPUT
   merge:
     runs-on: ubuntu-latest
     name: Merge develop to release
     needs: check_if_new_version
-    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
+    if: needs.check_if_new_version.outputs.rcExist == 'false'
     steps:
       - uses: actions/checkout@v2
       - uses: everlytic/branch-merge@1.1.2
@@ -124,7 +96,6 @@ jobs:
           target_branch: 'release'
           commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
   create_release:
-    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
     name: Create release
     needs: merge
     runs-on: ubuntu-latest
@@ -135,7 +106,7 @@ jobs:
           ref: release
       - name: Set up Tag as GH env
         id: tag
-        run: echo "TAG=$(cat setup.cfg | grep version | sed 's/version = //g')" >> $GITHUB_ENV
+        run: echo "TAG=$(cat pyproject.toml | grep version -m 1 | sed 's/version = //g' | sed 's/"//g')" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -147,7 +118,6 @@ jobs:
           draft: false
           prerelease: true
   publish_rc_package:
-    if: ${{ needs.check_if_new_version.outputs.rcExist == false }}
     name: Publish release candidate package to Test PyPI
     needs: create_release
     runs-on: ubuntu-latest

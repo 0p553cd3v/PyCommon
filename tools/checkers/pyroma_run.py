@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run pyroma checker for dead code"""
+"""Script to run pyroma checker."""
 
 #Imports
 import os
@@ -9,7 +9,7 @@ import yaml
 import subprocess
 
 def main():
-
+    """Run the script."""
     #Print script start notification
     print('pyroma run started')
 
@@ -27,7 +27,7 @@ def main():
     #Define score value for a checker to accept code
     min_score = ENV['PYROMA_MIN']
 
-    #Run vulture command
+    #Run pyroma command
 
     subprocess.check_call(
         [
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         sys.exit(1)
     except Exception as e:
         print(f"pyroma run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('pyroma run finished - SUCCESS')
         

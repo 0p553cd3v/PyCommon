@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
  
-"""Script to install package from local build"""
+"""Script to install package from local build."""
 
 #Imports
 import os
@@ -10,7 +10,8 @@ import subprocess
 
 #Main function def
 def main():
-    #Finding build path based on build.py script location
+    """Run the script."""
+    #Finding build path based on install.py script location
     file_path = os.path.dirname(__file__)
     build_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
@@ -43,5 +44,8 @@ if __name__ == "__main__":
     except subprocess.CalledProcessError as e:
         print(f"Installation failed: {e.returncode}")
         sys.exit(1)
+    except Exception as e:
+        print(f"Installation failed:  {e}")
+        sys.exit(100)    
     else:
         print('Installation finished - SUCCESS')

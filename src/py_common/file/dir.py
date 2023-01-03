@@ -1,13 +1,12 @@
-"""
-Standard operations on paths
-"""
+"""Dir module."""
 
 # Imports
 import os
+import shutil
 
 # Functions
 def create_dir_if_not_exist(path):
-    """Standard mkdir extended fith exception handling"""
+    """Standard mkdir extended fith exception handling."""
     # Check if folder exists
     if not os.path.exists(path):
         try:
@@ -26,3 +25,16 @@ def create_dir_if_not_exist(path):
         # logger.info(f"SKIP: Direcotry already exist: {path}")
         print(f"SKIP: Path already exist: {path}")
         return True
+
+
+def clean_up_folder_starting_with(directory, prefix):
+    """Function to recursively clean a folder on a direcotry which name starts with prefix."""
+    found = False
+    for item in os.listdir(directory):
+        path = os.path.join(directory, item)
+        if item.startswith(prefix):
+            shutil.rmtree(path)
+            found = True
+    if found is not True:
+        print(f"SKIP: Prefix: {prefix} not matching to any folder in directory: {directory}")
+    return True
