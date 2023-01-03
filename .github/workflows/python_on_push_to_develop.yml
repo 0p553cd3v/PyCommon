@@ -82,16 +82,10 @@ jobs:
       - name: Write variable
         id: setVar
         run: echo "rcExist=${{ steps.checkTag.outputs.exists }}" >> $GITHUB_OUTPUT
-  debug:
-    runs-on: ubuntu-latest
-    name: Debug variable
-    needs: check_if_new_version
-    steps:
-      - run: print "${{ needs.check_if_new_version.outputs.rcExist }}"
   merge:
     runs-on: ubuntu-latest
     name: Merge develop to release
-    needs: debug
+    needs: check_if_new_version
     if: needs.check_if_new_version.outputs.rcExist == 'false'
     steps:
       - uses: actions/checkout@v2
