@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run lizard CCN analyzer"""
+"""Script to run lizard CCN analyzer."""
 
 #Imports
 import os
@@ -10,7 +10,7 @@ import yaml
 
 #Main function def
 def main():
-    
+    """Run the script."""
     #Print script start notification
     print('Lizard run started')
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         sys.exit(1)
     except Exception as e:
         print(f"Lizard run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('Lizard run finished - SUCCESS')      
 

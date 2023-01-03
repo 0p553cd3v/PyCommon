@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-"""Script to run pylint linter"""
+"""Script to run pylint linter."""
 
 #Imports
 import os
 import yaml
 import sys
+import subprocess
 from pylint.lint import Run
 
 def main():
-
+    """Run the script."""
     #Print script start notification
     print('PyLint run started')
 
@@ -20,27 +21,24 @@ def main():
     #Changing directory to project config path
     os.chdir(project_config_path)
 
-    #Read env.yaml to get project parameters
-    with open(os.path.join('config', 'env.yml'), 'r') as file:
-        ENV = yaml.safe_load(file) 
+    #Run pylint command
 
-    #Define score value for a checker to accept code
-    score = ENV['PYLINT_SCORE']
-
-    pylint_args = ['./src', '--rcfile=tools/checkers/.pylintrc']
-
-    #Run linter command
-    pylint_results = Run(pylint_args, do_exit=False)
-    if float(pylint_results.linter.stats.global_note) >= score:
-        return True
-    else:
-        raise Exception(f"PyLint run finished - FAILED - Score below treshold {pylint_results.linter.stats.global_note} <= {score}\n")
+    subprocess.check_call(
+        [
+            "pylint",
+            "--rcfile=./pyproject.toml",
+            "./src",
+        ]
+    ) 
 
 if __name__ == "__main__":
     try:
         main()
+    except subprocess.CalledProcessError as e:
+        print(f"PyLint run failed: {e.returncode}")
+        sys.exit(1)
     except Exception as e:
         print(f"PyLint run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('PyLint run finished - SUCCESS')

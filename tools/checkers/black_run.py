@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run black"""
+"""Script to run black."""
 
 #Imports
 import os
@@ -8,7 +8,7 @@ import sys
 import subprocess
 
 def main():
-
+    """Run the script."""
     #Print script start notification
     print('Black run started')
 
@@ -40,6 +40,6 @@ if __name__ == "__main__":
         sys.exit(1)
     except Exception as e:
         print(f"Black run failed: {e}")
-        sys.exit(1)
+        sys.exit(100)
     else:
         print('Black run finished - SUCCESS')   
