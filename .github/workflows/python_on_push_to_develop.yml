@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: delete_old_branch
     outputs:
-      rcExist: ${{ steps.checkTag.outputs.rcExist }}
+      rcExist: ${{ steps.checkTag.outputs.rcExistTmp }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -79,7 +79,7 @@ jobs:
         id: checkTag
         with: 
           tag: "RC_${{ steps.newTag.outputs.newTag }}"
-      - run: echo "rcExist=${{ steps.checkTag.outputs.exists }}" >> $GITHUB_OUTPUT
+      - run: echo "rcExistTmp=${{ steps.checkTag.outputs.exists }}" >> $GITHUB_OUTPUT
   merge:
     runs-on: ubuntu-latest
     name: Merge develop to release
