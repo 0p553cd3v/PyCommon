@@ -22,7 +22,7 @@ def main():
     print('Custom python packages installation started')
     subprocess.check_call(
         [
-            "sudo",
+            #"sudo",
             "python3",
             "-m",
             "pip",
@@ -32,7 +32,7 @@ def main():
         ]
     )
     print('Custom python packages installation finished') 
-    
+
 #Main function call
 if __name__ == "__main__":
     try:
