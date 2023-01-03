@@ -6,7 +6,6 @@
 import os
 import os
 import sys
-import yaml
 import subprocess
 
 #Main function def
