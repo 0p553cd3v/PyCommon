@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run pylint linter"""
+"""Script to run pylint linter."""
 
 #Imports
 import os
@@ -10,7 +10,7 @@ import subprocess
 from pylint.lint import Run
 
 def main():
-    '''Main function to run script'''
+    """Run the script."""
     #Print script start notification
     print('PyLint run started')
 

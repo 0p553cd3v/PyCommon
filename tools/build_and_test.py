@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to build package and run all tests against builded package"""
+"""Script to build package and run all tests against builded package."""
 
 #Imports
 import os
@@ -9,7 +9,7 @@ import subprocess
 
 #Main function def
 def main():
-    ''''Main function to run script'''
+    """Run the script."""
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))

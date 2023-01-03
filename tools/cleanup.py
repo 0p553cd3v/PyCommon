@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-'''Script to cleanup run artifacts from repository'''
+"""Script to cleanup run artifacts from repository."""
 
 #Imports
 import os
@@ -14,7 +14,7 @@ from py_common.file import dir
 
 #Main function def
 def main():
-    ''''Main function to run script'''
+    """Run the script."""
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))

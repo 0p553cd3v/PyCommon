@@ -5,7 +5,7 @@
 
 # Function definitions
 def print_line_separator_with_title(title, separator, line_length):
-    """Function to print separation line with some title inside.
+    """Print configurable separation line with some title inside.
 
     Raises:
         Exception: "Separator length not equal to 1" when spearator is longer than one sign

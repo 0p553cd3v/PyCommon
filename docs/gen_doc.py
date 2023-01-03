@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run Sfinx doc generation tool"""
+"""Script to run Sfinx doc generation tool."""
 
 #Imports
 import os
@@ -8,6 +8,7 @@ import sys
 import subprocess
 
 def main():
+    """Run the script."""
     #Print script start notification
     print('Sfinx run started')
 

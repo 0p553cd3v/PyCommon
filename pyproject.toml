@@ -80,7 +80,7 @@ tests = []
 skips = []
 
 [tool.pydocstyle]
-ignore = 'D104'
+convention = 'google'
 
 [tool.pylint.main]
 # analyse-fallback-blocks =

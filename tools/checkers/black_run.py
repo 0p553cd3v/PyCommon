@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run black"""
+"""Script to run black."""
 
 #Imports
 import os
@@ -8,7 +8,7 @@ import sys
 import subprocess
 
 def main():
-    '''Main function to run script'''
+    """Run the script."""
     #Print script start notification
     print('Black run started')
 

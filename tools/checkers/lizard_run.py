@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run lizard CCN analyzer"""
+"""Script to run lizard CCN analyzer."""
 
 #Imports
 import os
@@ -10,7 +10,7 @@ import yaml
 
 #Main function def
 def main():
-    '''Main function to run script'''
+    """Run the script."""
     #Print script start notification
     print('Lizard run started')
 

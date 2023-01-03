@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run bandit security checker"""
+"""Script to run bandit security checker."""
 
 #Imports
 import os
@@ -9,7 +9,7 @@ import yaml
 import subprocess
 
 def main():
-    '''Main function to run script'''
+    """Run the script."""
     #Print script start notification
     print('Bandit run started')
 

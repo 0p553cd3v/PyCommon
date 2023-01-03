@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-"""
-Run all script (including code checkers, unit and integration tests, build and tests against package and generate documentation)
-"""
+"""Run all script (including code checkers, unit and integration tests, build and tests against package and generate documentation)."""
 
 #Imports
 import os
@@ -17,7 +15,7 @@ from py_common.base import prints
 
 #Main function def
 def main():
-    ''''Main function to run script'''
+    """Run the script."""
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
