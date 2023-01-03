@@ -6,7 +6,8 @@ Welcome to PyCommon's documentation!
    :caption: Contents:
 
    readme
-   modules
+   Source code<modules>
+   TODO's <todo>
 
 Indices and tables
 ==================

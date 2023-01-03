@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Script to run pyroma checker for dead code."""
+"""Script to run pyroma checker."""
 
 #Imports
 import os

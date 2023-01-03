@@ -31,7 +31,18 @@ def main():
             "docs/src",
             "src",
         ]
-    ) 
+    )
+
+    #Run todo comments generation command on source code
+    subprocess.check_call(
+        [
+            "py-todos",
+            "-o",
+            "docs/src/todo.md",
+            "-d",
+            "src",
+        ]
+    )
 
     subprocess.check_call(
         [
