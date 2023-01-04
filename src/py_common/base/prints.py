@@ -1,6 +1,5 @@
 """Prints module."""
 
-
 # Imports
 
 # Function definitions

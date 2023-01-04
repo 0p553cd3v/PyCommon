@@ -12,6 +12,7 @@ import subprocess
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
 from py_common.base import prints
+from py_common.log import log
 
 #Main function def
 def main():
@@ -24,6 +25,9 @@ def main():
 
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
+
+    #Setup logger instance
+    logger = log.get_logger()
 
     #Run bandit security checker
     prints.print_line_separator_with_title(" Bandit security checker ","-",100)
@@ -133,13 +137,16 @@ def main():
 
 #Main function call
 if __name__ == "__main__":
+    
+    logger = log.get_logger()
+
     try:
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Run script failed: {e.returncode}")
+        logger.error(f"Run script failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Run script failed:  {e}")
+        logger.error(f"Run script failed:  {e}")
         sys.exit(100)
     else:
-        print('Run script finished - SUCCESS')
+        logger.info('Run script finished - SUCCESS')
