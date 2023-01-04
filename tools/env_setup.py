@@ -5,7 +5,6 @@
 #Imports
 import os
 import sys
-import yaml
 import subprocess
 
 #Main function def
@@ -42,9 +41,6 @@ def main():
     logger = log.get_logger()
     
     
-
-
-
 #Main function call
 if __name__ == "__main__":
     try:

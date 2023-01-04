@@ -5,8 +5,8 @@ import os
 import logging
 import sys
 import inspect
-import yaml
 from datetime import datetime
+import yaml
 
 
 def _get_logger_config():
@@ -29,6 +29,11 @@ def _get_logger_config():
 
 
 def clean_log():
+    """Clean todays log file for project
+
+    Returns:
+        int: Return error number
+    """
     # Read env.yaml to get project parameters
     with open(os.path.join("config", "env.yml"), "r") as file:
         ENV = yaml.safe_load(file)
@@ -36,7 +41,6 @@ def clean_log():
     # Read necessary parameters
     PROJECT_NAME = ENV["PROJECT_NAME"]
     ENV_LOG_DIR = os.path.expanduser(ENV["ENV_LOG_DIR"])
-
     log_path = os.path.join(ENV_LOG_DIR, PROJECT_NAME, "{:%Y-%m-%d}.log".format(datetime.now()))
 
     # Remove log file
@@ -53,15 +57,7 @@ def get_logger():
     Args:
         projectname (str): Project name derived from config (common for all scripts within the project)
         envlogdir (str): Environment logging directory (common for all scripts and projects)
-        loglevel (str): Log level from range:
-          NOTSET
-          DEBUG
-          INFO
-          WARNING
-          ERROR
-          CRITICAL
-
-
+        loglevel (str): Log level from range: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
     Returns:
         logger: Returns initialize logger with name equal to {projectname}
     """
@@ -96,7 +92,7 @@ def get_logger():
         fileHandler.setFormatter(fileFormatter)
         logger.addHandler(fileHandler)
 
-        logger.info("New logger initialized for project: " + projectname)
+        logger.info(f"New logger initialized for project: {projectname}")
 
         # Return configured logger instance
     return logger

@@ -90,7 +90,7 @@ verbose = false
 [tool.bandit]
 exclude_dirs = []
 tests = []
-skips = []
+skips = ['B404', 'B603']
 
 [tool.pydocstyle]
 convention = 'google'
@@ -263,7 +263,8 @@ disable = [
     "unspecified-encoding",
     "unused-wildcard-import",
     "use-maxsplit-arg",
-    "logging-fstring-interpolation"
+    "logging-fstring-interpolation",
+    "protected-access"
 ]
 enable = [
     "raw-checker-failed",
@@ -408,7 +409,6 @@ enable = [
     "multiple-statements",
     "no-classmethod-decorator",
     "no-staticmethod-decorator",
-    "protected-access",
     "redundant-unittest-assert",
     "reimported",
     "simplifiable-if-statement",

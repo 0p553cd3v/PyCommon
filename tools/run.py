@@ -5,6 +5,7 @@
 #Imports
 import os
 import sys
+import yaml
 import subprocess
 
 #Define functions
@@ -13,6 +14,10 @@ import subprocess
 sys.path.append("src")
 from py_common.base import prints
 from py_common.log import log
+from py_common.script import run
+
+
+    
 
 #Main function def
 def main():
@@ -23,117 +28,64 @@ def main():
     #Changing directory to project config path
     os.chdir(project_config_path)
 
-    #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
-    os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
-
     #Setup logger instance
     logger = log.get_logger()
 
+    #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
+    os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
+
+    #Read env.yaml to get project parameters
+    with open(os.path.join('config', 'env.yml'), 'r') as file:
+        ENV = yaml.safe_load(file) 
+
     #Run bandit security checker
-    prints.print_line_separator_with_title(" Bandit security checker ","-",100)
-    subprocess.check_call(
-        [
-                "tools/checkers/bandit_run.py",
-        ]
-    ) 
+    confidnece_lvl = ENV['BANDIT_CONFIDENCE_LVL']
+    severity_lvl = ENV['BANDIT_SEVERITY_LVL']
+    run.run_subprocess_check_call("Bandit", "Security checker",["python3", "-m", "bandit", "-c", "pyproject.toml", str(confidnece_lvl), str(severity_lvl), "-r", "src"])
 
     #Run black formater 
-    prints.print_line_separator_with_title(" Black formatter ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/black_run.py",
-        ]
-    ) 
+    run.run_subprocess_check_call("Black", "Formatter",["python3", "-m", "black", "--verbose", "./src"])
     
-    #Run vulture checker    
-    prints.print_line_separator_with_title(" Vulture dead code checker ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/vulture_run.py",
-        ]
-    ) 
+    #Run vulture checker
+    run.run_subprocess_check_call("Vuluture", "Dead code checker",["python3", "-m", "vulture"])    
 
     #Run lizard CCN analyzer 
-    prints.print_line_separator_with_title(" Lizard cyclomatic complexity analyzer ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/lizard_run.py",
-        ]
-    ) 
+    ccn_limit = ENV['LIZARD_CCN']
+    length_limit = ENV['LIZARD_LENGTH']
+    param_limit = ENV['LIZARD_PAR_COUNT']
+    nloc_limit = ENV['LIZARD_NLOC']
+    run.run_subprocess_check_call("Lizard", "CCN analyzer",["lizard", "src/", "-V", "-Tcyclomatic_complexity=" + str(ccn_limit), "-Tlength=" + str(length_limit), "-Tparameter_count=" + str(param_limit), "-Tnloc=" + str(nloc_limit)])  
 
     #Run pylint checker
-    prints.print_line_separator_with_title(" PyLint linter checker ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/pylint_run.py",
-        ]
-    ) 
+    run.run_subprocess_check_call("PyLint", "Linter",["pylint", "--rcfile=./pyproject.toml", "./src",])
 
     #Run unit tests
-    prints.print_line_separator_with_title(" Unit tests ","-",100)
-    subprocess.check_call(
-        [
-            "tests/unit_tests/unit_tests_run.py",
-        ]
-    ) 
+    subprocess.check_call("tests/unit_tests/unit_tests_run.py") 
 
     #Run integration tests 
-    prints.print_line_separator_with_title(" Integration tests ","-",100)
-    subprocess.check_call(
-        [
-            "tests/integration_tests/integration_tests_run.py",
-        ]
-    )
-    
+    subprocess.check_call("tests/integration_tests/integration_tests_run.py")
+     
     #Run docstr coverage checker
-    prints.print_line_separator_with_title(" docstr coverage checker ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/docstrcov_run.py",
-        ]
-    ) 
+    docstrcov_min_score = ENV['DOCSTRING_COVERAGE']
+    run.run_subprocess_check_call("dockstrcov", "Documentation coverage checker",["docstr-coverage", "./src", "./tools", "./build/build.py", "--fail-under=" + str(docstrcov_min_score), "-i", "-P", "-m"])
 
-   #Run docstr coverage checker
-    prints.print_line_separator_with_title(" pydockstyle checker ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/pydocstyle_run.py",
-        ]
-    ) 
+    #Run pydocstyle checker
+    run.run_subprocess_check_call("pydocstyle", "Documentation style checker",["pydocstyle", "./src", "./tools", "./build/build.py", "./docs/gen_doc.py"])
 
     #Run pyroma checker
-    prints.print_line_separator_with_title(" pyroma package config checker ","-",100)
-    subprocess.check_call(
-        [
-            "tools/checkers/pyroma_run.py",
-        ]
-    ) 
+    pyroma_min_score = ENV['PYROMA_MIN']
+    run.run_subprocess_check_call("pyroma", "Config checker",["python3", "-m", "pyroma", ".", "--min", str(pyroma_min_score)])
 
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
-    prints.print_line_separator_with_title(" Build and test package ","-",100)
-    subprocess.check_call(
-        [
-            "tools/build_and_test.py",
-        ]
-    )
+    subprocess.check_call("tools/build_and_test.py")
 
     #Run dccoumentation builder script
-    prints.print_line_separator_with_title(" Generate documentation ","-",100)
-    subprocess.check_call(
-        [
-            "docs/gen_doc.py",
-        ]
-    )
+    subprocess.check_call("docs/gen_doc.py")
 
     #Run cleaunup script
-    prints.print_line_separator_with_title(" Cleanup artifacts ","-",100)
-    subprocess.check_call(
-        [
-            "tools/cleanup.py",
-        ]
-    )
+    subprocess.check_call("tools/cleanup.py")
 
 #Main function call
 if __name__ == "__main__":
