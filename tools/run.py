@@ -93,6 +93,7 @@ if __name__ == "__main__":
     logger = log.get_logger()
 
     try:
+        logger.info('Run script started')
         main()
     except subprocess.CalledProcessError as e:
         logger.error(f"Run script failed: {e.returncode}")

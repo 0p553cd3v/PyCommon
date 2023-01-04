@@ -8,6 +8,10 @@ import glob
 import sys
 import subprocess
 
+#Adding path to sys to use local function defined in src folder
+sys.path.append("src")
+from py_common.log import log
+
 #Main function def
 def main():
     """Run the script."""
@@ -39,13 +43,17 @@ def main():
 
 #Main function call
 if __name__ == "__main__":
+    
+    logger = log.get_logger()
+
     try:
+        logger.info('Installation started')
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Installation failed: {e.returncode}")
+        logger.exception(f"Installation failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Installation failed:  {e}")
+        logger.exception(f"Installation failed:  {e}")
         sys.exit(100)    
     else:
-        print('Installation finished - SUCCESS')
+        logger.info('Installation finished - SUCCESS')

@@ -10,7 +10,7 @@ import subprocess
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
 from py_common.file import dir
-
+from py_common.log import log
 
 #Main function def
 def main():
@@ -33,13 +33,17 @@ def main():
     
 #Main function call
 if __name__ == "__main__":
+    
+    logger = log.get_logger()
+    
     try:
+        logger.info('Cleanup started')
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Cleanup failed: {e.returncode}")
+        logger.exception(f"Cleanup failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Cleanup failed:  {e}")
+        logger.exception(f"Cleanup failed:  {e}")
         sys.exit(100)  
     else:
-        print('Cleanup finished - SUCCESS')    
+        logger.info('Cleanup finished - SUCCESS')    

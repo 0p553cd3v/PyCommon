@@ -30,7 +30,7 @@ def run_subprocess_check_call(name, description, command):
     try:
         subprocess.check_call(command, shell=False)
     except subprocess.CalledProcessError as e:
-        logger.error(f"{name} run failed: {e.returncode}")
+        logger.exception(f"{name} run failed: {e.returncode}")
         sys.exit(1)
     else:
         logger.info("{name} run finished - SUCCESS")
