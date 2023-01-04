@@ -56,6 +56,19 @@ namespaces = false
 [tool.setuptools.dynamic]
 dependencies = {file = ["config/requirements.txt"]}
 
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py310
+
+[testenv]
+description = install pytest in a virtual environment and invoke it on the tests folder
+deps = -rconfig/requirements.txt
+commands = 
+    python3 tests/unit_tests/unit_tests_run.py   
+    python3 tests/integration_tests/integration_tests_run.py   
+"""
 
 [tool.black]
 line-length = 120

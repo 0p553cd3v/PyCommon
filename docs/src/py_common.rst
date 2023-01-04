@@ -14,5 +14,5 @@ Subpackages
 
    py_common.base
    py_common.file
-   py_common.logger
+   py_common.log
    py_common.path
