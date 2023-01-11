@@ -34,12 +34,12 @@ def main():
 
     #Import of common functions intentionally at this point as earlier dependencies can be missing
     sys.path.insert(1, './src')
-    from py_common.path import path
-    from py_common.file import dir
-    from py_common.log import log
+    from py_common.sp_log import m_log
+    from py_common.sp_env import m_conf
 
-    logger = log.get_logger()
-    
+    logger = m_log.get_logger()
+    cfg = m_conf.get_env_config_base()
+    m_conf.generate_env_config_paths()
     
 #Main function call
 if __name__ == "__main__":

@@ -9,8 +9,8 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.script import run
-from py_common.log import log
+from py_common.sp_script import m_run
+from py_common.sp_log import m_log
 
 #Main function def
 def main():
@@ -26,12 +26,12 @@ def main():
     subprocess.check_call("build/build.py") 
 
     #Run tox command
-    run.run_subprocess_check_call("Tox", "venv checker",["Tox"])    
+    m_run.run_subprocess_check_call("Tox", "venv checker",["Tox"])    
     
 #Main function call
 if __name__ == "__main__":
     
-    logger = log.get_logger()
+    logger = m_log.get_logger()
     
     try:
         logger.info('Build and test started')

@@ -12,9 +12,10 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.base import prints
-from py_common.log import log
-from py_common.script import run
+from py_common.sp_base import m_print
+from py_common.sp_log import m_log
+from py_common.sp_script import m_run
+from py_common.sp_env import m_conf
 
 
     
@@ -29,7 +30,7 @@ def main():
     os.chdir(project_config_path)
 
     #Setup logger instance
-    logger = log.get_logger()
+    logger = m_log.get_logger()
 
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
     os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
@@ -41,23 +42,23 @@ def main():
     #Run bandit security checker
     confidnece_lvl = ENV['BANDIT_CONFIDENCE_LVL']
     severity_lvl = ENV['BANDIT_SEVERITY_LVL']
-    run.run_subprocess_check_call("Bandit", "Security checker",["python3", "-m", "bandit", "-c", "pyproject.toml", str(confidnece_lvl), str(severity_lvl), "-r", "src"])
+    m_run.run_subprocess_check_call("Bandit", "Security checker",["python3", "-m", "bandit", "-c", "pyproject.toml", str(confidnece_lvl), str(severity_lvl), "-r", "src"])
 
     #Run black formater 
-    run.run_subprocess_check_call("Black", "Formatter",["python3", "-m", "black", "--verbose", "./src"])
+    m_run.run_subprocess_check_call("Black", "Formatter",["python3", "-m", "black", "--verbose", "./src"])
     
     #Run vulture checker
-    run.run_subprocess_check_call("Vuluture", "Dead code checker",["python3", "-m", "vulture"])    
+    m_run.run_subprocess_check_call("Vuluture", "Dead code checker",["python3", "-m", "vulture"])    
 
     #Run lizard CCN analyzer 
     ccn_limit = ENV['LIZARD_CCN']
     length_limit = ENV['LIZARD_LENGTH']
     param_limit = ENV['LIZARD_PAR_COUNT']
     nloc_limit = ENV['LIZARD_NLOC']
-    run.run_subprocess_check_call("Lizard", "CCN analyzer",["lizard", "src/", "-V", "-Tcyclomatic_complexity=" + str(ccn_limit), "-Tlength=" + str(length_limit), "-Tparameter_count=" + str(param_limit), "-Tnloc=" + str(nloc_limit)])  
+    m_run.run_subprocess_check_call("Lizard", "CCN analyzer",["lizard", "src/", "-V", "-Tcyclomatic_complexity=" + str(ccn_limit), "-Tlength=" + str(length_limit), "-Tparameter_count=" + str(param_limit), "-Tnloc=" + str(nloc_limit)])  
 
     #Run pylint checker
-    run.run_subprocess_check_call("PyLint", "Linter",["pylint", "--rcfile=./pyproject.toml", "./src",])
+    m_run.run_subprocess_check_call("PyLint", "Linter",["pylint", "--rcfile=./pyproject.toml", "./src",])
 
     #Run unit tests
     subprocess.check_call("tests/unit_tests/unit_tests_run.py") 
@@ -67,14 +68,14 @@ def main():
      
     #Run docstr coverage checker
     docstrcov_min_score = ENV['DOCSTRING_COVERAGE']
-    run.run_subprocess_check_call("dockstrcov", "Documentation coverage checker",["docstr-coverage", "./src", "./tools", "./build/build.py", "--fail-under=" + str(docstrcov_min_score), "-i", "-P", "-m"])
+    m_run.run_subprocess_check_call("dockstrcov", "Documentation coverage checker",["docstr-coverage", "./src", "./tools", "./build/build.py", "--fail-under=" + str(docstrcov_min_score), "-i", "-P", "-m"])
 
     #Run pydocstyle checker
-    run.run_subprocess_check_call("pydocstyle", "Documentation style checker",["pydocstyle", "./src", "./tools", "./build/build.py", "./docs/gen_doc.py"])
+    m_run.run_subprocess_check_call("pydocstyle", "Documentation style checker",["pydocstyle", "./src", "./tools", "./build/build.py", "./docs/gen_doc.py"])
 
     #Run pyroma checker
     pyroma_min_score = ENV['PYROMA_MIN']
-    run.run_subprocess_check_call("pyroma", "Config checker",["python3", "-m", "pyroma", ".", "--min", str(pyroma_min_score)])
+    m_run.run_subprocess_check_call("pyroma", "Config checker",["python3", "-m", "pyroma", ".", "--min", str(pyroma_min_score)])
 
     os.environ["PYTHONPATH"] = ""
 
@@ -90,7 +91,8 @@ def main():
 #Main function call
 if __name__ == "__main__":
     
-    logger = log.get_logger()
+    logger = m_log.get_logger()
+    cfg = m_conf.get_env_conf_all()
 
     try:
         logger.info('Run script started')

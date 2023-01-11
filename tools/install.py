@@ -10,7 +10,7 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.log import log
+from py_common.sp_log import m_log
 
 #Main function def
 def main():
@@ -44,7 +44,7 @@ def main():
 #Main function call
 if __name__ == "__main__":
     
-    logger = log.get_logger()
+    logger = m_log.get_logger()
 
     try:
         logger.info('Installation started')

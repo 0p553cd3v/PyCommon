@@ -4,11 +4,12 @@
 import sys
 import subprocess
 
-from py_common.base import prints
-from py_common.log import log
+from py_common.sp_base import m_print
+from py_common.sp_log import m_log
+from py_common.sp_env import m_conf
 
 
-def run_subprocess_check_call(name, description, command):
+def run_subprocess_check_call(name: str, description: str, command: str):
     """_summary_
 
     Args:
@@ -20,17 +21,18 @@ def run_subprocess_check_call(name, description, command):
         int: Error number
     """
     # Start logger instance
-    logger = log.get_logger()
+    logger = m_log.get_logger()
+    cfg = m_conf.get_env_conf_all()
 
     # Print separator
-    prints.print_line_separator_with_title(name + " - " + description, "-", 100)
+    m_print.print_line_separator_with_title(name + " - " + description, "-", 100)
 
     logger.info(f"{name} run started")
 
     try:
         subprocess.check_call(command, shell=False)
     except subprocess.CalledProcessError as e:
-        logger.exception(f"{name} run failed: {e.returncode}")
+        logger.exception(f"{name} run failed: {e}")
         sys.exit(1)
     else:
         logger.info(f"{name} run finished - SUCCESS")
