@@ -23,17 +23,17 @@ from py_common.sp_env import m_conf
 #Main function def
 def main():
     """Run the script."""
-    file_path = os.path.dirname(__file__)
-    project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
+    file_dir = os.path.dirname(__file__)
+    repo_dir = os.path.abspath(os.path.join(file_dir, os.pardir))
 
     #Changing directory to project config path
-    os.chdir(project_config_path)
+    os.chdir(repo_dir)
 
     #Setup logger instance
     logger = m_log.get_logger()
 
     #Set temporarily PYTHONPATH to src catalogue to fing source code of modules first
-    os.environ["PYTHONPATH"] = os.path.join(project_config_path, "src")
+    os.environ["PYTHONPATH"] = os.path.join(repo_dir, "src")
 
     #Read env.yaml to get project parameters
     with open(os.path.join('config', 'env.yml'), 'r') as file:

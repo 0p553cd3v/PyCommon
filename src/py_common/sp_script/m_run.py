@@ -2,6 +2,7 @@
 
 # Imports
 import sys
+import os
 import subprocess
 
 from py_common.sp_base import m_print
@@ -10,7 +11,7 @@ from py_common.sp_log import m_log
 # from py_common.sp_env import m_conf
 
 
-def run_subprocess_check_call(name: str, description: str, command: str):
+def run_subprocess_check_call(name: str, description: str, command: str, run_dir="", repo_dir=""):
     """_summary_
 
     Args:
@@ -21,9 +22,16 @@ def run_subprocess_check_call(name: str, description: str, command: str):
     Returns:
         int: Error number
     """
+
+    if repo_dir != "":
+        os.chdir(os.path.abspath(repo_dir))
+
     # Start logger instance
     logger = m_log.get_logger()
     # cfg = m_conf.get_env_conf_all()
+
+    if run_dir != "":
+        os.chdir(os.path.abspath(run_dir))
 
     # Print separator
     m_print.print_line_separator_with_title(name + " - " + description, "-", 100)
