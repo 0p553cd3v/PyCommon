@@ -26,6 +26,11 @@ def get_env_config_base():
 
 
 def generate_env_config_paths():
+    """Generate and write to file paths based on general config.
+
+    Returns:
+        int: Error number
+    """
     cfg = get_env_config_base()
 
     # Create base repository directories
@@ -57,6 +62,19 @@ def generate_env_config_paths():
 
 
 def get_env_config_paths():
+    """Get environmental paths configruration from generated environmental config paths.
+
+    Returns:
+        dict: dictionary with following project environmental parematers:
+            repo_dir,
+            repo_tls_dir,
+            repo_bld_dir,
+            repo_src_dir,
+            repo_conf_dir,
+            repo_docs_dir,
+            conf_dir,
+            dcv_dir
+    """
     cfg = get_env_config_base()
     path_to_paths_file = os.path.join(cfg["env_conf_dir"], cfg["project_name"], "paths.yml")
     with open(path_to_paths_file, "r") as file:
@@ -74,6 +92,11 @@ def get_env_config_paths():
 
 
 def get_env_conf_all():
+    """Get general config and paths environemental config.
+
+    Returns:
+        dict: dictionary consisting of general and paths environmetal configs
+    """
     cfg = get_env_config_base()
     paths = get_env_config_paths()
     return cfg.update(paths)

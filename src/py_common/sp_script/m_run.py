@@ -6,7 +6,8 @@ import subprocess
 
 from py_common.sp_base import m_print
 from py_common.sp_log import m_log
-from py_common.sp_env import m_conf
+
+# from py_common.sp_env import m_conf
 
 
 def run_subprocess_check_call(name: str, description: str, command: str):
@@ -22,7 +23,7 @@ def run_subprocess_check_call(name: str, description: str, command: str):
     """
     # Start logger instance
     logger = m_log.get_logger()
-    cfg = m_conf.get_env_conf_all()
+    # cfg = m_conf.get_env_conf_all()
 
     # Print separator
     m_print.print_line_separator_with_title(name + " - " + description, "-", 100)
