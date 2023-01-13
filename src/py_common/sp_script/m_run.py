@@ -12,7 +12,7 @@ from py_common.sp_log import m_log
 
 
 def run_subprocess_check_call(name: str, description: str, command: str, run_dir="", repo_dir=""):
-    """_summary_
+    """Run subprocess check call with defined parameters and logging.
 
     Args:
         name (str): Name of the function to be run (one word)
@@ -22,6 +22,7 @@ def run_subprocess_check_call(name: str, description: str, command: str, run_dir
     Returns:
         int: Error number
     """
+    base_run_dir = os.getcwd()
 
     if repo_dir != "":
         os.chdir(os.path.abspath(repo_dir))
@@ -32,6 +33,9 @@ def run_subprocess_check_call(name: str, description: str, command: str, run_dir
 
     if run_dir != "":
         os.chdir(os.path.abspath(run_dir))
+    else:
+        # For scenario when run dir not specified but script was runned from diffrrent directory then repo dir
+        os.chdir(os.path.abspath(base_run_dir))
 
     # Print separator
     m_print.print_line_separator_with_title(name + " - " + description, "-", 100)
