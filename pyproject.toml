@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.3"
+version = "0.0.4"
 description = "Python common modules library for system administration"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -56,6 +56,19 @@ namespaces = false
 [tool.setuptools.dynamic]
 dependencies = {file = ["config/requirements.txt"]}
 
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py310
+
+[testenv]
+description = install pytest in a virtual environment and invoke it on the tests folder
+deps = -rconfig/requirements.txt
+commands = 
+    python3 tests/unit_tests/unit_tests_run.py   
+    python3 tests/integration_tests/integration_tests_run.py   
+"""
 
 [tool.black]
 line-length = 120
@@ -77,7 +90,7 @@ verbose = false
 [tool.bandit]
 exclude_dirs = []
 tests = []
-skips = []
+skips = ['B404', 'B603']
 
 [tool.pydocstyle]
 convention = 'google'
@@ -250,7 +263,8 @@ disable = [
     "unspecified-encoding",
     "unused-wildcard-import",
     "use-maxsplit-arg",
-    "logging-fstring-interpolation"
+    "logging-fstring-interpolation",
+    "protected-access"
 ]
 enable = [
     "raw-checker-failed",
@@ -395,7 +409,6 @@ enable = [
     "multiple-statements",
     "no-classmethod-decorator",
     "no-staticmethod-decorator",
-    "protected-access",
     "redundant-unittest-assert",
     "reimported",
     "simplifiable-if-statement",

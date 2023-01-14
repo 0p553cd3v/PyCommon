@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-"""Script to setup the environemnt for package development."""
+"""Script to setup the environment for package development."""
 
 #Imports
-import os
 import os
 import sys
 import subprocess
@@ -13,12 +12,12 @@ def main():
     """Run the script."""
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
-    project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
+    project_run_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
     #Changing directory to project config path
-    os.chdir(project_config_path)
+    os.chdir(project_run_path)
 
-    #Run test command
+    #Run install command
     print('Custom python packages installation started')
     subprocess.check_call(
         [
@@ -33,6 +32,15 @@ def main():
     )
     print('Custom python packages installation finished') 
 
+    #Import of common functions intentionally at this point as earlier dependencies can be missing
+    sys.path.insert(1, './src')
+    from py_common.sp_log import m_log
+    from py_common.sp_env import m_conf
+
+    logger = m_log.get_logger()
+    cfg = m_conf.get_env_config_base()
+    m_conf.generate_env_config_paths()
+    
 #Main function call
 if __name__ == "__main__":
     try:

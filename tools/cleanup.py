@@ -9,8 +9,8 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.file import dir
-
+from py_common.sp_file import m_dir
+from py_common.sp_log import m_log
 
 #Main function def
 def main():
@@ -27,19 +27,23 @@ def main():
 
     #Run cleanup commands
     print('Cleanup - Build artifacts')
-    dir.clean_up_folder_starting_with("build","lib")
-    dir.clean_up_folder_starting_with("build","bdist")
+    m_dir.clean_up_folder_starting_with("build","lib")
+    m_dir.clean_up_folder_starting_with("build","bdist")
 
     
 #Main function call
 if __name__ == "__main__":
+    
+    logger = m_log.get_logger()
+    
     try:
+        logger.info('Cleanup started')
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Cleanup failed: {e.returncode}")
+        logger.exception(f"Cleanup failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Cleanup failed:  {e}")
+        logger.exception(f"Cleanup failed:  {e}")
         sys.exit(100)  
     else:
-        print('Cleanup finished - SUCCESS')    
+        logger.info('Cleanup finished - SUCCESS')    
