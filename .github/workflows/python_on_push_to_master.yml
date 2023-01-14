@@ -85,6 +85,7 @@ jobs:
           release_name: Release ${{ env.TAG }}
           draft: false
           prerelease: true
+          commitish: master
   publish_package:
     name: Publish release candidate package to Test PyPI
     needs: create_release
@@ -97,10 +98,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Install dependencies
+      - name: Install dependencies and setup enviroment
         run: |
-          python -m pip install --upgrade pip
-          pip install build
+          python3 tools/env_setup.py
       - name: Install pypa/build
         run: >-
           python -m
