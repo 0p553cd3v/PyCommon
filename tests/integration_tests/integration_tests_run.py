@@ -17,7 +17,7 @@ def main():
     #Finding build path based on build.py script location
     file_dir = os.path.dirname(__file__)
     repo_dir = os.path.abspath(os.path.join(file_dir, os.pardir,os.pardir))
-
+    
     #Changing directory to project config path
     os.chdir(repo_dir)
 
