@@ -20,11 +20,8 @@ def clean_log():
     log_path = os.path.join(cfg["env_log_dir"], cfg["project_name"], "{:%Y-%m-%d}.log".format(datetime.now()))
 
     # Remove log file
-    if os.path.isfile(log_path):
-        os.rmdir(log_path)
-        return 0
-    else:
-        return 1
+    os.remove(log_path)
+    return 0
 
 
 def get_logger():
