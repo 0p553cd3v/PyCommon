@@ -10,7 +10,7 @@ from py_common.sp_env import m_conf
 
 
 def clean_log():
-    """Clean todays log file for project
+    """Clean todays log file for project.
 
     Returns:
         int: Return error number

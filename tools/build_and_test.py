@@ -26,7 +26,7 @@ def main():
     subprocess.check_call("build/build.py") 
 
     #Run tox command
-    m_run.run_subprocess_check_call("Tox", "venv checker",["Tox"])    
+    m_run.run_subprocess_check_call("Tox", "venv checker",["tox"])    
     
 #Main function call
 if __name__ == "__main__":
