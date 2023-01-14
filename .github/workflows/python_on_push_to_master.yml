@@ -85,6 +85,7 @@ jobs:
           release_name: Release ${{ env.TAG }}
           draft: false
           prerelease: true
+          commitish: master
   publish_package:
     name: Publish release candidate package to Test PyPI
     needs: create_release
