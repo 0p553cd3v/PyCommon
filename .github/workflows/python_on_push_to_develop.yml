@@ -117,6 +117,7 @@ jobs:
           release_name: Release candidate RC_${{ env.TAG }}
           draft: false
           prerelease: true
+          commitish: release
   publish_rc_package:
     name: Publish release candidate package to Test PyPI
     needs: create_release
