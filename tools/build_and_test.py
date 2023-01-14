@@ -7,6 +7,11 @@ import os
 import sys
 import subprocess
 
+#Adding path to sys to use local function defined in src folder
+sys.path.append("src")
+from py_common.sp_script import m_run
+from py_common.sp_log import m_log
+
 #Main function def
 def main():
     """Run the script."""
@@ -18,31 +23,25 @@ def main():
     os.chdir(project_config_path)
 
     #Run run build command
-    print('Build - Build started')
-    subprocess.check_call(
-        [
-            "build/build.py",
-        ]
-    ) 
+    subprocess.check_call("build/build.py") 
 
     #Run tox command
-    print('Tox - Installation and tests started')
-    subprocess.check_call(
-        [
-            "tox",
-        ]
-    ) 
+    m_run.run_subprocess_check_call("Tox", "venv checker",["tox"])    
     
 #Main function call
 if __name__ == "__main__":
+    
+    logger = m_log.get_logger()
+    
     try:
+        logger.info('Build and test started')
         main()
     except subprocess.CalledProcessError as e:
-        print(f"Build and test failed: {e.returncode}")
+        logger.exception(f"Build and test failed: {e.returncode}")
         sys.exit(1)
     except Exception as e:
-        print(f"Build and test failed:  {e}")
+        logger.exception(f"Build and test failed:  {e}")
         sys.exit(100)  
     else:
-        print('Build and test finished - SUCCESS')
+        logger.info('Build and test finished - SUCCESS')
     
