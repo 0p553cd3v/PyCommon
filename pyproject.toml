@@ -7,7 +7,7 @@ name = "opssecdev_pycommon"
 version = "0.0.6"
 description = "Python common modules library for system administration"
 readme = "README.md"
-requires-python = "==3.10"
+requires-python = ">=3.10"
 keywords = [ 
     "common",
     "library",
