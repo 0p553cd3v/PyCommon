@@ -4,10 +4,10 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.5"
+version = "0.0.6"
 description = "Python common modules library for system administration"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 keywords = [ 
     "common",
     "library",
@@ -60,7 +60,7 @@ dependencies = {file = ["config/requirements.txt"]}
 legacy_tox_ini = """
 [tox]
 envlist =
-    py310
+    py311
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder
@@ -112,7 +112,7 @@ jobs = 1
 limit-inference-results = 100
 # load-plugins =
 persistent = true
-py-version = "3.10"
+py-version = "3.11"
 # recursive =
 suggestion-mode = true
 # unsafe-load-any-extension =
