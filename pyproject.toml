@@ -60,7 +60,7 @@ dependencies = {file = ["config/requirements.txt"]}
 legacy_tox_ini = """
 [tox]
 envlist =
-    py311
+    py310
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder
