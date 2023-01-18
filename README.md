@@ -37,16 +37,12 @@ $ cd PyCommon
 ```
 $ python3 tools/run.py
 ```
-* Build package
-Simply run 
+* If want to install from repo then:
+- Build package
 ```
 $ python3 build/build.py
 ```
-or if you want to performe build and verification over build package
-```
-$ python3 tools/build_and_test.py
-```
-* Install package 
+- Install package 
 ```
 $ python3 tools/install.py
 ```
