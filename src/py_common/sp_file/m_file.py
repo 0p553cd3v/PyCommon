@@ -2,6 +2,7 @@
 
 # Imports
 import os
+import shutil
 
 
 def create_new_file(dest_file_path):
@@ -79,3 +80,33 @@ def overwrite_line_with_matching_prefix_to_file(dest_file_path: str, prefix: str
             print(f"Adding {new_line} as new line")
             print(f"SUCCESS: Line added to file {dest_file_path}")
             return 0
+
+
+def copy_new_file_to_dir(source_file, dest_dir):
+    """Copy file if not exist in destination directory.
+
+    Args:
+        source_file (path): Path to source file
+        dest_dir (path): Desination folder path
+
+    Returns:
+        int: Error number
+    """
+    # Check if destination folder exists
+    if not os.path.exists(dest_dir):
+        print(f"Folder {dest_dir} not exist")
+        return 1
+    # Check if source file exists
+    if not os.path.exists(source_file):
+        print(f"File {source_file} not exist")
+        return 2
+    # Check if file exists in destination directory
+    if not os.path.exists(os.path.join(dest_dir, os.path.basename(source_file))):
+        # Copy file to directory if it was not existing
+        shutil.copyfile(source_file, os.path.join(dest_dir, os.path.basename(source_file)))
+        print(f"SUCCESS: File {source_file} added to directory {dest_dir}")
+        return 0
+    else:
+        # Skip if file exists in destination directory
+        print(f"SKIP: File {source_file} already exist in directory {dest_dir}")
+        return 0

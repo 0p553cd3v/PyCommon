@@ -84,3 +84,65 @@ def test_overwrite_line_with_matching_prefix_to_file_when_file_not_found(tmp_pat
     assert result == 10
     assert out.strip() == "Destination file ./file.txt not exist"
     assert err == ''
+
+def test_copy_new_file_to_dir(tmp_path, capsys):
+    '''Main path test to assert if file was copied'''
+    d = tmp_path
+    os.chdir(d)
+    source_file_path=os.path.join(d, "file.txt")
+    with open(source_file_path, "x"):
+        pass
+    dest_dir = os.path.join(d, "dest_folder")
+    os.mkdir(dest_dir)
+    result = m_file.copy_new_file_to_dir(source_file_path, dest_dir)
+    assert os.path.exists(os.path.join(dest_dir,"file.txt"))
+    out, err = capsys.readouterr()
+    assert result == 0
+    assert out.strip() == f"SUCCESS: File {source_file_path} added to directory {dest_dir}"
+    assert err == ''
+
+def test_copy_new_file_to_dir_when_exist(tmp_path, capsys):
+    '''Alternative path test to assert if file was not copied when exist'''
+    d = tmp_path
+    os.chdir(d)
+    source_file_path=os.path.join(d, "file.txt")
+    dest_dir = os.path.join(d, "dest_folder")
+    with open(source_file_path, "x"):
+        pass
+    os.mkdir(dest_dir)
+    with open(os.path.join(dest_dir,"file.txt"), "x"):
+        pass
+
+    result = m_file.copy_new_file_to_dir(source_file_path, dest_dir)
+    assert os.path.exists(os.path.join(dest_dir,"file.txt"))
+    out, err = capsys.readouterr()
+    assert result == 0
+    assert out.strip() == f"SKIP: File {source_file_path} already exist in directory {dest_dir}"
+    assert err == ''
+
+def test_copy_new_file_to_dir_when_source_not_exist(tmp_path, capsys):
+    '''Alternative path test to assert if error when source file not exist'''
+    d = tmp_path
+    os.chdir(d)
+    source_file_path=os.path.join(d, "file.txt")
+    dest_dir = os.path.join(d, "dest_folder")
+    os.mkdir(dest_dir)
+    result = m_file.copy_new_file_to_dir(source_file_path, dest_dir)
+    out, err = capsys.readouterr()
+    assert result == 2
+    assert out.strip() == f"File {source_file_path} not exist"
+    assert err == ''
+
+def test_copy_new_file_to_dir_when_dest_dir_not_exist(tmp_path, capsys):
+    '''Alternative path test to assert if file was not copied when direcotry not exist'''
+    d = tmp_path
+    os.chdir(d)
+    source_file_path=os.path.join(d, "file.txt")
+    with open(source_file_path, "x"):
+        pass
+    dest_dir = os.path.join(d, "dest_folder")
+    result = m_file.copy_new_file_to_dir(source_file_path, dest_dir)
+    out, err = capsys.readouterr()
+    assert result == 1
+    assert out.strip() == f"Folder {dest_dir} not exist"
+    assert err == ''

@@ -45,6 +45,7 @@
 
 <span class="c1"># Imports</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 
 
 <div class="viewcode-block" id="create_new_file"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.create_new_file">[docs]</a><span class="k">def</span> <span class="nf">create_new_file</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">):</span>
@@ -122,6 +123,36 @@
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding </span><span class="si">{</span><span class="n">new_line</span><span class="si">}</span><span class="s2"> as new line&quot;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SUCCESS: Line added to file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="copy_new_file_to_dir"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.copy_new_file_to_dir">[docs]</a><span class="k">def</span> <span class="nf">copy_new_file_to_dir</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">dest_dir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Copy file if not exist in destination directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source_file (path): Path to source file</span>
+<span class="sd">        dest_dir (path): Desination folder path</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Error number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if destination folder exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_dir</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Folder </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s2"> not exist&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="c1"># Check if source file exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">source_file</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">source_file</span><span class="si">}</span><span class="s2"> not exist&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">2</span>
+    <span class="c1"># Check if file exists in destination directory</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">source_file</span><span class="p">))):</span>
+        <span class="c1"># Copy file to directory if it was not existing</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dest_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">source_file</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SUCCESS: File </span><span class="si">{</span><span class="n">source_file</span><span class="si">}</span><span class="s2"> added to directory </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Skip if file exists in destination directory</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SKIP: File </span><span class="si">{</span><span class="n">source_file</span><span class="si">}</span><span class="s2"> already exist in directory </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
 </pre></div>
 
             <div class="clearer"></div>
