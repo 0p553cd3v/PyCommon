@@ -66,6 +66,7 @@ envlist =
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder
+install_command=pip install --trusted-host=pypi.org --trusted-host=files.pythonhosted.org {opts} {packages}
 deps = -rconfig/requirements.txt
 commands = 
     python3 tests/unit_tests/unit_tests_run.py   

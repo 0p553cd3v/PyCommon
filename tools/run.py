@@ -55,7 +55,7 @@ def main():
     length_limit = ENV['LIZARD_LENGTH']
     param_limit = ENV['LIZARD_PAR_COUNT']
     nloc_limit = ENV['LIZARD_NLOC']
-    m_run.run_subprocess_check_call("Lizard", "CCN analyzer",["python3", "-m", "lizard", "src/", "-V", "-Tcyclomatic_complexity=" + str(ccn_limit), "-Tlength=" + str(length_limit), "-Tparameter_count=" + str(param_limit), "-Tnloc=" + str(nloc_limit)])  
+    m_run.run_subprocess_check_call("Lizard", "CCN analyzer",["lizard", "src/", "-V", "-Tcyclomatic_complexity=" + str(ccn_limit), "-Tlength=" + str(length_limit), "-Tparameter_count=" + str(param_limit), "-Tnloc=" + str(nloc_limit)])  
 
     #Run pylint checker
     m_run.run_subprocess_check_call("PyLint", "Linter",["pylint", "--rcfile=./pyproject.toml", "./src",])
