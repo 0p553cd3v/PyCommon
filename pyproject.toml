@@ -4,10 +4,10 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.6"
+version = "0.0.7"
 description = "Python common modules library for system administration"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 keywords = [ 
     "common",
     "library",
@@ -16,7 +16,7 @@ keywords = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.9",
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
     "Natural Language :: English",
@@ -60,10 +60,13 @@ dependencies = {file = ["config/requirements.txt"]}
 legacy_tox_ini = """
 [tox]
 envlist =
+    py39
     py310
+    py311
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder
+install_command=pip install --trusted-host=pypi.org --trusted-host=files.pythonhosted.org {opts} {packages}
 deps = -rconfig/requirements.txt
 commands = 
     python3 tests/unit_tests/unit_tests_run.py   
@@ -72,7 +75,7 @@ commands =
 
 [tool.black]
 line-length = 120
-target-version = ['py310']
+target-version = ['py311']
 include = '\.pyi?$'
 # 'extend-exclude' excludes files or directories in addition to the defaults
 extend-exclude = ''
@@ -112,7 +115,7 @@ jobs = 1
 limit-inference-results = 100
 # load-plugins =
 persistent = true
-py-version = "3.10"
+py-version = "3.9"
 # recursive =
 suggestion-mode = true
 # unsafe-load-any-extension =
