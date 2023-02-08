@@ -1,5 +1,6 @@
 import pytest
 import os
+import subprocess
 
 @pytest.fixture()
 def create_test_project_env(tmp_path, autouse=True):
@@ -25,3 +26,15 @@ def create_test_project_env(tmp_path, autouse=True):
         file.write('ENV_DCV_DIR: ' + test_env_dcv_dir + "\n")
         file.write('LOG_LEVEL: ' + test_log_level + "\n")
     return [ test_home, test_repo_dir, test_log_dir]
+
+@pytest.fixture()
+def build_dummy_docker_image(tmp_path, autouse=True):
+    os.chdir(tmp_path)
+    output = ""
+    with open("Dockerfile", "w") as f:
+        f.write('FROM ubuntu\nRUN apt-get curl\nHEALTHCHECK --interval=5s --timeout=3s --retries=10 CMD curl --fail http://localhost || exit 1\nENTRYPOINT ["tail", "-f", "/dev/null"]')
+
+    build_command = "docker build -t dummy_docker_image ."
+    subprocess.call(['bash', '-c', build_command])
+
+    
