@@ -15,3 +15,6 @@ __pycache__
 
 #Ignore coverage
 .coverage
+
+#Ignore docker
+*.docker

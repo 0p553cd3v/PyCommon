@@ -1,5 +1,6 @@
 import pytest
 import os
+import subprocess
 
 @pytest.fixture()
 def create_test_project_env(tmp_path, autouse=True):
@@ -25,3 +26,49 @@ def create_test_project_env(tmp_path, autouse=True):
         file.write('ENV_DCV_DIR: ' + test_env_dcv_dir + "\n")
         file.write('LOG_LEVEL: ' + test_log_level + "\n")
     return [ test_home, test_repo_dir, test_log_dir]
+
+@pytest.fixture(scope="session", autouse=True)
+def build_dummy_docker_image(tmp_path_factory):
+    tmpdir = tmp_path_factory.mktemp("data")
+    os.chdir(tmpdir)
+    print(tmpdir)
+    health_check_content = (
+        f"import sys\n"
+        f"import os\n"
+        f"if os.path.isfile('if_i_exist_the_container_is_healthy.txt'):\n"
+        f"    sys.exit(0)\n"
+        f"print('Health check failed!!!')\n"
+        f"sys.exit(1)\n"
+        )
+
+    print(health_check_content)
+
+    with open("health-check.py", "w") as f_hc:
+        f_hc.write(health_check_content)
+
+    i_exist_content = (
+        "I exist!!!\n"
+        )
+
+    print(i_exist_content)
+
+    with open("if_i_exist_the_container_is_healthy.txt", "w") as f_ih:
+        f_ih.write(i_exist_content)
+
+    dockerfile_content = (
+        f"FROM python:3.9\n"
+        f"WORKDIR /home\n"
+        f"COPY . .\n"
+        f"RUN chmod +x health-check.py\n"
+        f"HEALTHCHECK --interval=5s --timeout=3s CMD python health-check.py\n"
+        f'ENTRYPOINT ["tail", "-f", "/dev/null"]\n'
+        )
+
+    print(dockerfile_content)
+
+    with open("Dockerfile", "w") as f_dc:
+        f_dc.write(dockerfile_content)
+
+    build_command = "docker build --no-cache -t dummy_docker_image ."
+    subprocess.call(['bash', '-c', build_command])
+    
