@@ -13,6 +13,7 @@ Subpackages
    :maxdepth: 4
 
    py_common.sp_base
+   py_common.sp_docker
    py_common.sp_env
    py_common.sp_file
    py_common.sp_log

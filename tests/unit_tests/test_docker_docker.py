@@ -1,9 +1,13 @@
 import subprocess
 from docker.models.containers import Container
 import docker
+import os
 from py_common.sp_docker import m_docker
+import pytest
 
-def test_container_name(build_dummy_docker_image):
+WAIT_EXECUTION_TIMEOUT = 60
+
+def test_container_name():
     '''Main path test to assert if container is retrived corectly'''
     CONTAINER_NAME = "test_container_name"
     IMAGE_NAME = "dummy_docker_image"
@@ -29,7 +33,7 @@ def test_container_name(build_dummy_docker_image):
     )
     assert type(container) is Container
 
-def test_get_container_health(build_dummy_docker_image):
+def test_get_container_health():
     '''Main path test to assert if container health is retirived properly'''
     CONTAINER_NAME = "test_get_container_health"
     IMAGE_NAME = "dummy_docker_image"
@@ -57,7 +61,8 @@ def test_get_container_health(build_dummy_docker_image):
     
     assert (result == "starting" or result == "healthy")
 
-def test_wait_for_container_to_be_up_and_running(build_dummy_docker_image):
+@pytest.mark.execution_timeout(WAIT_EXECUTION_TIMEOUT)
+def test_wait_for_container_to_be_up_and_running():
     '''Main path test to assert if custom separator print function prints separator'''
     CONTAINER_NAME = "test_wait_for_container_to_be_up_and_running"
     IMAGE_NAME = "dummy_docker_image"

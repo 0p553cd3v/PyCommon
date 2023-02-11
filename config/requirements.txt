@@ -17,3 +17,4 @@ python-todo-comments==0.3.0
 tox==4.1.3
 tomli==2.0.1
 docker==6.0.1
+pytest-timeouts==1.2.1
