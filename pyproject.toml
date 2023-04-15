@@ -22,7 +22,7 @@ classifiers = [
     "Natural Language :: English",
     "Framework :: Pytest",
     "Framework :: tox",
-    "Development Status :: 2 - Pre-Alpha"
+    "Development Status :: 3 - Alpha"
 ]
 dynamic = [
     "dependencies"
@@ -75,7 +75,7 @@ commands =
 
 [tool.black]
 line-length = 120
-target-version = ['py311']
+target-version = ['py39']
 include = '\.pyi?$'
 # 'extend-exclude' excludes files or directories in addition to the defaults
 extend-exclude = ''
