@@ -18,7 +18,37 @@ def main():
     os.chdir(project_run_path)
 
     #Run install command
-    print('Custom python packages installation started')
+    print('Development python packages installation started')
+    subprocess.check_call(
+        [
+            #"sudo",
+            "python3",
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            "./config/dev_requirements.txt"
+        ]
+    )
+    print('Development python packages installation finished') 
+
+    #Run install command
+    print('Quality assurance packages installation started')
+    subprocess.check_call(
+        [
+            #"sudo",
+            "python3",
+            "-m",
+            "pip",
+            "install",
+            "-r",
+            "./config/qa_requirements.txt"
+        ]
+    )
+    print('Quality assurance packages installation finished') 
+
+    #Run install command
+    print('Python packages installation started')
     subprocess.check_call(
         [
             #"sudo",
@@ -30,7 +60,7 @@ def main():
             "./config/requirements.txt"
         ]
     )
-    print('Custom python packages installation finished') 
+    print('Python packages installation finished') 
 
     #Import of common functions intentionally at this point as earlier dependencies can be missing
     sys.path.insert(1, './src')
