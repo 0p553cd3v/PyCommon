@@ -63,6 +63,7 @@ envlist =
     py39
     py310
     py311
+isolated_build = True
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder

@@ -110,3 +110,37 @@ def copy_new_file_to_dir(source_file, dest_dir):
         # Skip if file exists in destination directory
         print(f"SKIP: File {source_file} already exist in directory {dest_dir}")
         return 0
+
+
+def write_content_to_empty_file(dest_file_path, content):
+    """Write content to an empty file.
+
+    Args:
+        source_file (path): Path to source file
+        content (str): Content - prefarably list
+
+    Returns:
+        int: Error number
+    """
+    # Check if destination file exists
+    if not os.path.exists(dest_file_path):
+        print(f"Destination file {dest_file_path} not exist")
+        return 10
+
+    # Check if file is empty
+    if os.path.getsize(dest_file_path) > 0:
+        print(f"Destination file {dest_file_path} is not empty")
+        return 20
+
+    # Open file
+    with open(dest_file_path, "w+") as f:
+
+        # Write elements of conrtent list
+        for items in content:
+            f.write("%s\n" % items)
+
+        print(f"SUCCESS: Content added to file {dest_file_path}")
+
+    # close the file
+    f.close()
+    return 0

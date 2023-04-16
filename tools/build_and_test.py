@@ -6,11 +6,14 @@
 import os
 import sys
 import subprocess
+import yaml
+import shutil
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
 from py_common.sp_script import m_run
 from py_common.sp_log import m_log
+from py_common.sp_file import m_file
 
 #Main function def
 def main():
@@ -19,14 +22,36 @@ def main():
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
+    #Read env.yaml to get project parameters
+    with open(os.path.join('config', 'env.yml'), 'r') as file:
+        ENV = yaml.safe_load(file)
+
     #Changing directory to project config path
     os.chdir(project_config_path)
 
     #Run run build command
     subprocess.check_call("build/build.py") 
 
+    #Create pyenv python version file
+    m_file.create_new_file(os.path.join('./.python-version'))
+
+    #Read list of python interpreters 
+    python_interpreters = ENV['PYTHON_INTERPRETERS']
+
+    #Write list of interpreters to python file
+    m_file.write_content_to_empty_file(os.path.join('./.python-version'),python_interpreters)
+
     #Run tox command
-    m_run.run_subprocess_check_call("Tox", "venv checker",["tox"])    
+    m_run.run_subprocess_check_call("Install tox for pyenv - if used", "tox installer",["python3", "-m", "pip", "install", "tox", "tox-pyenv", "py"])
+
+    #Run tox command
+    m_run.run_subprocess_check_call("Tox", "venv checker",["python3", "-m", "tox"])
+
+    #Remove pyenv python version file
+    os.remove(os.path.join('./.python-version'))
+
+    #Remove pyenv python version file
+    shutil.rmtree(os.path.join('./.tox/'))       
     
 #Main function call
 if __name__ == "__main__":
