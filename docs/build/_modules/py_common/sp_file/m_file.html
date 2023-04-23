@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>py_common.sp_file.m_file &#8212; PyCommon 0.0.7 documentation</title>
+    <title>py_common.sp_file.m_file &#8212; PyCommon 0.0.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/classic.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
@@ -29,7 +29,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">PyCommon 0.0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyCommon 0.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">py_common.sp_file.m_file</a></li> 
       </ul>
@@ -49,7 +49,7 @@
 
 
 <div class="viewcode-block" id="create_new_file"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.create_new_file">[docs]</a><span class="k">def</span> <span class="nf">create_new_file</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create new file or skip if exist.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create new file or skip if exist.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        int: Error number</span>
@@ -72,7 +72,7 @@
 
 
 <div class="viewcode-block" id="overwrite_line_with_matching_prefix_to_file"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.overwrite_line_with_matching_prefix_to_file">[docs]</a><span class="k">def</span> <span class="nf">overwrite_line_with_matching_prefix_to_file</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Overwrite line with matching prefix, skip or add if not exist in file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Overwrite line with matching prefix, skip or add if not exist in file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        dest_file_path (str): Path to destination file</span>
@@ -126,7 +126,7 @@
 
 
 <div class="viewcode-block" id="copy_new_file_to_dir"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.copy_new_file_to_dir">[docs]</a><span class="k">def</span> <span class="nf">copy_new_file_to_dir</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">dest_dir</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Copy file if not exist in destination directory.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy file if not exist in destination directory.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        source_file (path): Path to source file</span>
@@ -153,6 +153,40 @@
         <span class="c1"># Skip if file exists in destination directory</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SKIP: File </span><span class="si">{</span><span class="n">source_file</span><span class="si">}</span><span class="s2"> already exist in directory </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="write_content_to_empty_file"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.write_content_to_empty_file">[docs]</a><span class="k">def</span> <span class="nf">write_content_to_empty_file</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write content to an empty file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source_file (path): Path to source file</span>
+<span class="sd">        content (str): Content - prefarably list</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Error number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if destination file exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Destination file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2"> not exist&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">10</span>
+
+    <span class="c1"># Check if file is empty</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Destination file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2"> is not empty&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">20</span>
+
+    <span class="c1"># Open file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+        <span class="c1"># Write elements of conrtent list</span>
+        <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">items</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SUCCESS: Content added to file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># close the file</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
 </pre></div>
 
             <div class="clearer"></div>
@@ -184,7 +218,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">PyCommon 0.0.7 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PyCommon 0.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">py_common.sp_file.m_file</a></li> 
       </ul>

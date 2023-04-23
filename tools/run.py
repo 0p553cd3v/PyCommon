@@ -12,13 +12,9 @@ import subprocess
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
-from py_common.sp_base import m_print
 from py_common.sp_log import m_log
 from py_common.sp_script import m_run
 from py_common.sp_env import m_conf
-
-
-    
 
 #Main function def
 def main():
@@ -80,7 +76,7 @@ def main():
     os.environ["PYTHONPATH"] = ""
 
     #Run Build and test script
-    subprocess.check_call("tools/build_and_test.py")
+    subprocess.check_call("tools/build_and_test.py", env=os.environ)
 
     #Run dccoumentation builder script
     subprocess.check_call("docs/gen_doc.py")

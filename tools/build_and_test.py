@@ -6,6 +6,9 @@
 import os
 import sys
 import subprocess
+import yaml
+import shutil
+import time
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
@@ -19,6 +22,10 @@ def main():
     file_path = os.path.dirname(__file__)
     project_config_path = os.path.abspath(os.path.join(file_path, os.pardir))
 
+    #Read env.yaml to get project parameters
+    with open(os.path.join('config', 'env.yml'), 'r') as file:
+        ENV = yaml.safe_load(file)
+
     #Changing directory to project config path
     os.chdir(project_config_path)
 
@@ -26,7 +33,10 @@ def main():
     subprocess.check_call("build/build.py") 
 
     #Run tox command
-    m_run.run_subprocess_check_call("Tox", "venv checker",["tox"])    
+    m_run.run_subprocess_check_call("Tox", "venv checker",["python3", "-m", "tox"])
+
+    #Remove tox env
+    shutil.rmtree(os.path.join('./.tox/'))       
     
 #Main function call
 if __name__ == "__main__":

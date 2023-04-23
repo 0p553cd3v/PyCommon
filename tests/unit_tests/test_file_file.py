@@ -146,3 +146,57 @@ def test_copy_new_file_to_dir_when_dest_dir_not_exist(tmp_path, capsys):
     assert result == 1
     assert out.strip() == f"Folder {dest_dir} not exist"
     assert err == ''
+
+
+def test_write_content_to_empty_file(tmp_path, capsys):
+    '''Main path to assert if content added if file is empty'''
+    d = tmp_path
+    os.chdir(d)
+    with open('./file.txt', 'a') as file:
+        file.write('')
+    
+    new_content = [
+        'New test content - line 1',
+        'New test content - line 2',
+    ]  
+
+    result = m_file.write_content_to_empty_file("./file.txt", new_content)
+    out, err = capsys.readouterr()
+    assert result == 0
+    assert out.strip() == "SUCCESS: Content added to file ./file.txt"
+    assert err == ''
+
+def test_write_content_to_empty_file_when_file_not_found(tmp_path, capsys):
+    '''Alternative path to assert if error on file not found'''
+    d = tmp_path
+    os.chdir(d)
+    
+    new_content = [
+        'New test content - line 1',
+        'New test content - line 2',
+    ]  
+
+    result = m_file.write_content_to_empty_file("./file.txt", new_content)
+    out, err = capsys.readouterr()
+    assert result == 10
+    assert out.strip() == "Destination file ./file.txt not exist"
+    assert err == ''
+
+def test_write_content_to_empty_file_when_not_empty(tmp_path, capsys):
+    '''Alternative path to assert if error on file not empty'''
+    d = tmp_path
+    os.chdir(d)
+    
+    with open('./file.txt', 'a') as file:
+        file.write('Some not expected content')
+    
+    new_content = [
+        'New test content - line 1',
+        'New test content - line 2',
+    ]  
+
+    result = m_file.write_content_to_empty_file("./file.txt", new_content)
+    out, err = capsys.readouterr()
+    assert result == 20
+    assert out.strip() == "Destination file ./file.txt is not empty"
+    assert err == ''

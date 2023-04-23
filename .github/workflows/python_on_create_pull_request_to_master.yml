@@ -13,10 +13,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: |
+            3.9
+            3.10
+            3.11
       - name: Install dependencies and setup enviroment
         run: |
-          python3 tools/env_setup.py
+          python3 tools/env_setup.py --nopyenv
       - name: Run 
         run: |
           python3 tools/run.py
