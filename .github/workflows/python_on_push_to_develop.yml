@@ -32,7 +32,7 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies and setup enviroment
         run: |
-          python3 tools/env_setup.py
+          python3 tools/env_setup.py --nopyenv
       - name: Run 
         run: |
           python3 tools/run.py

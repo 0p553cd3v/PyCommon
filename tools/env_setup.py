@@ -6,9 +6,14 @@
 import os
 import sys
 import subprocess
+import argparse
 
 #Main function def
-def main():
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-n', '--nopyenv', action='store_true')
+    args = parser.parse_args()
+    
     """Run the script."""
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
@@ -74,23 +79,25 @@ def main():
     cfg = m_conf.get_env_config_base()
     m_conf.generate_env_config_paths()
 
-    #Read env.yaml to get project parameters
-    with open(os.path.join('config', 'env.yml'), 'r') as file:
-        ENV = yaml.safe_load(file)
+    #Run wit pyenv setup if not disabled
+    if not args.nopyenv:
+        #Read env.yaml to get project parameters
+        with open(os.path.join('config', 'env.yml'), 'r') as file:
+            ENV = yaml.safe_load(file)
 
-    #Create pyenv python version file
-    m_file.create_new_file(os.path.join('./.python-version'))
+        #Create pyenv python version file
+        m_file.create_new_file(os.path.join('./.python-version'))
 
-    #Read list of python interpreters 
-    python_interpreters = list(ENV['PYTHON_INTERPRETERS'])
+        #Read list of python interpreters 
+        python_interpreters = list(ENV['PYTHON_INTERPRETERS'])
 
-    m_run.run_subprocess_check_call("Install required pyenv versions", "pyenv install",["pyenv", "install", "-s"] + python_interpreters)
+        m_run.run_subprocess_check_call("Install required pyenv versions", "pyenv install",["pyenv", "install", "-s"] + python_interpreters)
 
-    #Add default system interpreter as a main one
-    python_interpreters.insert(0,"system")
+        #Add default system interpreter as a main one
+        python_interpreters.insert(0,"system")
 
-    #Write list of interpreters to python file
-    m_file.write_content_to_empty_file(os.path.join('./.python-version'),python_interpreters)
+        #Write list of interpreters to python file
+        m_file.write_content_to_empty_file(os.path.join('./.python-version'),python_interpreters)
 
 #Main function call
 if __name__ == "__main__":
