@@ -10,11 +10,11 @@ import argparse
 
 #Main function def
 def main(argv=None):
+    """Run the script."""
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--nopyenv', action='store_true')
     args = parser.parse_args()
     
-    """Run the script."""
     #Finding build path based on build.py script location
     file_path = os.path.dirname(__file__)
     project_run_path = os.path.abspath(os.path.join(file_path, os.pardir))
