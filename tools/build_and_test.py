@@ -8,6 +8,7 @@ import sys
 import subprocess
 import yaml
 import shutil
+import time
 
 #Adding path to sys to use local function defined in src folder
 sys.path.append("src")
@@ -42,7 +43,7 @@ def main():
     m_file.write_content_to_empty_file(os.path.join('./.python-version'),python_interpreters)
 
     #Run tox command
-    m_run.run_subprocess_check_call("Install tox for pyenv - if used", "tox installer",["python3", "-m", "pip", "install", "tox", "tox-pyenv", "py"])
+    #m_run.run_subprocess_check_call("Install tox for pyenv - if used", "tox installer",["python3", "-m", "pip", "install", "tox<4", "tox-pyenv", "py"])
 
     #Run tox command
     m_run.run_subprocess_check_call("Tox", "venv checker",["python3", "-m", "tox"])
@@ -50,7 +51,7 @@ def main():
     #Remove pyenv python version file
     os.remove(os.path.join('./.python-version'))
 
-    #Remove pyenv python version file
+    #Remove tox env
     shutil.rmtree(os.path.join('./.tox/'))       
     
 #Main function call

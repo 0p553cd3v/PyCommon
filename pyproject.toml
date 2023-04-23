@@ -59,11 +59,13 @@ dependencies = {file = ["config/requirements.txt"]}
 [tool.tox]
 legacy_tox_ini = """
 [tox]
+tox_pyenv_fallback=False
+isolated_build = True
 envlist =
     py39
     py310
     py311
-isolated_build = True
+
 
 [testenv]
 description = install pytest in a virtual environment and invoke it on the tests folder
