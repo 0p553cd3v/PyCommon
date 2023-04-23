@@ -12,5 +12,6 @@ myst-parser==0.18.1
 m2r==0.3.1
 python-todo-comments==0.3.0
 tox==3.28.0
+tox-pyenv==1.1.0
 tomli==2.0.1
 pytest-timeouts==1.2.1

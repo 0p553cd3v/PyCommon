@@ -153,6 +153,40 @@
         <span class="c1"># Skip if file exists in destination directory</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SKIP: File </span><span class="si">{</span><span class="n">source_file</span><span class="si">}</span><span class="s2"> already exist in directory </span><span class="si">{</span><span class="n">dest_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="write_content_to_empty_file"><a class="viewcode-back" href="../../../py_common.sp_file.m_file.html#py_common.sp_file.m_file.write_content_to_empty_file">[docs]</a><span class="k">def</span> <span class="nf">write_content_to_empty_file</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write content to an empty file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source_file (path): Path to source file</span>
+<span class="sd">        content (str): Content - prefarably list</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: Error number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if destination file exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Destination file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2"> not exist&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">10</span>
+
+    <span class="c1"># Check if file is empty</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Destination file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2"> is not empty&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">20</span>
+
+    <span class="c1"># Open file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dest_file_path</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+        <span class="c1"># Write elements of conrtent list</span>
+        <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">items</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SUCCESS: Content added to file </span><span class="si">{</span><span class="n">dest_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># close the file</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
 </pre></div>
 
             <div class="clearer"></div>

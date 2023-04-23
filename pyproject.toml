@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.8"
+version = "0.0.9"
 description = "Python common modules library for system administration"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -17,6 +17,8 @@ keywords = [
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: POSIX :: Linux",
     "Natural Language :: English",

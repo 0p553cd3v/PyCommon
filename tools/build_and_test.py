@@ -14,7 +14,6 @@ import time
 sys.path.append("src")
 from py_common.sp_script import m_run
 from py_common.sp_log import m_log
-from py_common.sp_file import m_file
 
 #Main function def
 def main():
@@ -33,23 +32,8 @@ def main():
     #Run run build command
     subprocess.check_call("build/build.py") 
 
-    #Create pyenv python version file
-    m_file.create_new_file(os.path.join('./.python-version'))
-
-    #Read list of python interpreters 
-    python_interpreters = ENV['PYTHON_INTERPRETERS']
-
-    #Write list of interpreters to python file
-    m_file.write_content_to_empty_file(os.path.join('./.python-version'),python_interpreters)
-
-    #Run tox command
-    #m_run.run_subprocess_check_call("Install tox for pyenv - if used", "tox installer",["python3", "-m", "pip", "install", "tox<4", "tox-pyenv", "py"])
-
     #Run tox command
     m_run.run_subprocess_check_call("Tox", "venv checker",["python3", "-m", "tox"])
-
-    #Remove pyenv python version file
-    os.remove(os.path.join('./.python-version'))
 
     #Remove tox env
     shutil.rmtree(os.path.join('./.tox/'))       
