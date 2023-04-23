@@ -15,7 +15,7 @@ Following hardware setup is used for the project:
 
 ## Prerequisities
 To run this project following prerequisites have to be fulfilled:
-* Python3 has to be installed
+* Python3 has to be installed (3.9.2 - current default RaspbianOS version, 3.10.x, 3.11.x)
 * Tox has to be installed
 * Pytest has to be installed
 
@@ -59,4 +59,8 @@ or
 TODO
 
 ## Notes
+It is worth to install pyenv for handling of multiple python interpreters for tox. Link to instruction:
+https://codeburst.io/how-to-install-and-manage-multiple-python-versions-in-wsl2-1131c4e50a58
+
+
 
