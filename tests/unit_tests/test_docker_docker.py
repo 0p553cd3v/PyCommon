@@ -68,18 +68,8 @@ def test_stop_all_docker_containers():
     IMAGE_NAME = "dummy_docker_image"
 
     #Clean up conteiners before test
-    subprocess.check_call(
-        [
-            "docker",
-            "rm",
-            "-f",
-            "$(docker",
-            "ps",
-            "-a",
-            "-q)",
-        ], 
-        shell=True
-    )
+    if subprocess.check_output(r"docker ps -a -q", shell=True).decode('UTF-8') != "":
+        subprocess.check_call(r"docker rm -f $(docker ps -a -q)", shell=True)
 
     #Run first container
     subprocess.check_call(
@@ -107,7 +97,7 @@ def test_stop_all_docker_containers():
         ]
     )
 
-    ps_run = subprocess.check_output('docker ps', shell=True)
+    ps_run = subprocess.check_output('docker ps', shell=True).decode('UTF-8')
     ps_run_found = False
     if ps_run.find(CONTAINER_NAME_1) != -1 and ps_run.find(CONTAINER_NAME_2) != -1:
         ps_run_found = True
@@ -115,7 +105,7 @@ def test_stop_all_docker_containers():
 
     result = m_docker.stop_all_docker_containers()
 
-    ps_stop = subprocess.check_output('docker ps', shell=True)
+    ps_stop = subprocess.check_output('docker ps', shell=True).decode('UTF-8')
 
     ps_stop_not_found = False
     if ps_stop.find(CONTAINER_NAME_1) == -1 and ps_stop.find(CONTAINER_NAME_2) == -1:
@@ -123,18 +113,7 @@ def test_stop_all_docker_containers():
     assert ps_stop_not_found == True
 
     #Cleanup of stoped docker images
-    subprocess.check_call(
-        [
-            "docker",
-            "rm",
-            "-f",
-            "$(docker",
-            "ps",
-            "-a",
-            "-q)",
-        ], 
-        shell=True
-    )
+    subprocess.check_call(r"docker rm -f $(docker ps -a -q)", shell=True)
 
     assert result == 0
 
@@ -142,18 +121,8 @@ def test_stop_all_docker_containers_when_no_containers_running(capsys):
     '''Alternative path test to assert if recoginzed when no containers are running.'''
 
     #Clean up conteiners before test
-    subprocess.check_call(
-        [
-            "docker",
-            "rm",
-            "-f",
-            "$(docker",
-            "ps",
-            "-a",
-            "-q)",
-        ], 
-        shell=True
-    )
+    if subprocess.check_output(r"docker ps -a -q", shell=True).decode('UTF-8') != "":
+        subprocess.check_call(r"docker rm -f $(docker ps -a -q)", shell=True)
 
     result = m_docker.stop_all_docker_containers()
     out, err = capsys.readouterr()
