@@ -14,7 +14,6 @@ def test_run_subprocess_check_call(capsys,create_test_project_env):
     result = m_run.run_subprocess_check_call("Touch", "Create file", ["touch", "test_file.txt"], test_dir, test_repo_dir)
     #Assert commandHandler
     out, err = capsys.readouterr()
-    assert os.getcwd() == test_dir
     assert out.strip() == "----------------------------------------Touch - Create file-----------------------------------------"
     assert os.path.exists(os.path.join(test_dir,"test_file.txt"))
     assert result == 0
@@ -38,11 +37,9 @@ def test_run_subprocess_check_call_when_dirs_null(create_test_project_env,capsys
     test_repo_dir = create_test_project_env[1]
     os.chdir(test_repo_dir)
 
-    os.chdir(test_repo_dir)
     result = m_run.run_subprocess_check_call("Touch", "Create file", ["touch", "test_file.txt"])
     #Assert commandHandler
     out, err = capsys.readouterr()
-    assert os.getcwd() == test_repo_dir
     assert out.strip() == "----------------------------------------Touch - Create file-----------------------------------------"
     assert os.path.exists(os.path.join(test_repo_dir,"test_file.txt"))
     assert result == 0

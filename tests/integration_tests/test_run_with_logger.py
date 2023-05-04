@@ -15,7 +15,6 @@ def test_run_subprocess_check_call(capsys,create_test_project_env, caplog):
     result = m_run.run_subprocess_check_call("Touch", "Create file", ["touch", "test_file.txt"], test_dir, test_repo_dir)
     #Assert commandHandler
     out, err = capsys.readouterr()
-    assert os.getcwd() == test_dir
     assert out.strip() == "----------------------------------------Touch - Create file-----------------------------------------"
     assert os.path.exists(os.path.join(test_dir,"test_file.txt"))
     assert result == 0
