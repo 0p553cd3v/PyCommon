@@ -45,3 +45,18 @@ def get_container_by_name(name: str):
     client = docker.from_env()
     container = client.containers.get(name)
     return container
+
+
+def stop_all_docker_containers():
+    """Stop all running docker containers.
+
+    Returns:
+        int: Error number
+    """
+    client = docker.from_env()
+    if not client.containers.list():
+        print("SKIP: No running containers.")
+        return 0
+    for container in client.containers.list():
+        container.stop()
+    return 0

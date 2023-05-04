@@ -19,6 +19,9 @@ To run this project following prerequisites have to be fulfilled:
 * Tox has to be installed
 * Pytest has to be installed
 
+## Developer notes
+WARNING!!! - Package is incorporating bulk functions for docker environement. Running tests will stop and remove all containers!!!
+
 ## Install (Instalation from source code)
 To run this project, make following instructions:
 * Create folder for code in user folder
