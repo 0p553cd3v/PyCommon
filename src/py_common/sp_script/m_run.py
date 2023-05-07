@@ -55,4 +55,6 @@ def run_subprocess_check_call(name: str, description: str, command: str, subproc
         sys.exit(1)
     else:
         logger.info(f"{name} run finished - SUCCESS")
+        # Returning to script run dir
+        os.chdir(os.path.abspath(base_run_dir))
         return 0
