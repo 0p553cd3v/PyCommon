@@ -11,7 +11,13 @@ def get_env_config_base():
     """Get environmental configruration.
 
     Returns:
-        dict: dictionary with following project environmental parematers: project_name, env_log_dir, env_conf_dir, env_dcv_dir, env_keys_dir, log_level
+        dict: dictionary with following project environmental parematers:
+            - project_name,
+            - env_log_dir,
+            - env_conf_dir,
+            - env_dcv_dir,
+            - env_keys_dir,
+            - log_level
     """
     with open(os.path.join("config", "env.yml"), "r") as file:
         f = yaml.safe_load(file)
