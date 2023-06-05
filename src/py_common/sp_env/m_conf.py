@@ -11,7 +11,13 @@ def get_env_config_base():
     """Get environmental configruration.
 
     Returns:
-        dict: dictionary with following project environmental parematers: project_name, env_log_dir, env_conf_dir, env_dcv_dir, log_level
+        dict: dictionary with following project environmental parematers:
+            - project_name,
+            - env_log_dir,
+            - env_conf_dir,
+            - env_dcv_dir,
+            - env_keys_dir,
+            - log_level
     """
     with open(os.path.join("config", "env.yml"), "r") as file:
         f = yaml.safe_load(file)
@@ -21,6 +27,7 @@ def get_env_config_base():
         "env_log_dir": os.path.expanduser(f["ENV_LOG_DIR"]),
         "env_conf_dir": os.path.expanduser(f["ENV_CONF_DIR"]),
         "env_dcv_dir": os.path.expanduser(f["ENV_DCV_DIR"]),
+        "env_keys_dir": os.path.expanduser(f["ENV_KEYS_DIR"]),
         "log_level": f["LOG_LEVEL"],
     }
 
@@ -44,9 +51,12 @@ def generate_env_config_paths():
 
     conf_dir = os.path.join(cfg["env_conf_dir"], cfg["project_name"])
     dcv_dir = os.path.join(cfg["env_dcv_dir"], cfg["project_name"])
+    keys_dir = os.path.join(cfg["env_keys_dir"], cfg["project_name"])
 
     path_to_paths_file = os.path.join(conf_dir, "paths.yml")
     m_dir.create_dir_if_not_exist(conf_dir)
+    m_dir.create_dir_if_not_exist(dcv_dir)
+    m_dir.create_dir_if_not_exist(keys_dir)
     m_file.create_new_file(path_to_paths_file)
 
     m_file.overwrite_line_with_matching_prefix_to_file(path_to_paths_file, "REPO_DIR: ", repo_dir)
@@ -57,6 +67,7 @@ def generate_env_config_paths():
     m_file.overwrite_line_with_matching_prefix_to_file(path_to_paths_file, "REPO_DOCS_DIR: ", repo_docs_dir)
     m_file.overwrite_line_with_matching_prefix_to_file(path_to_paths_file, "CONF_DIR: ", conf_dir)
     m_file.overwrite_line_with_matching_prefix_to_file(path_to_paths_file, "DCV_DIR: ", dcv_dir)
+    m_file.overwrite_line_with_matching_prefix_to_file(path_to_paths_file, "KEYS_DIR: ", keys_dir)
 
     return 0
 
@@ -73,7 +84,8 @@ def get_env_config_paths():
             repo_conf_dir,
             repo_docs_dir,
             conf_dir,
-            dcv_dir
+            dcv_dir,
+            keys_dir
     """
     cfg = get_env_config_base()
     path_to_paths_file = os.path.join(cfg["env_conf_dir"], cfg["project_name"], "paths.yml")
@@ -88,6 +100,7 @@ def get_env_config_paths():
         "repo_docs_dir": os.path.expanduser(f["REPO_DOCS_DIR"]),
         "conf_dir": os.path.expanduser(f["CONF_DIR"]),
         "dcv_dir": os.path.expanduser(f["DCV_DIR"]),
+        "keys_dir": os.path.expanduser(f["KEYS_DIR"]),
     }
 
 
