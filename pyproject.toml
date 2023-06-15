@@ -249,6 +249,7 @@ confidence = [
     "UNDEFINED"
 ]
 disable = [
+    "consider-using-with",
     "locally-disabled",
     "file-ignored",
     "suppressed-message",
