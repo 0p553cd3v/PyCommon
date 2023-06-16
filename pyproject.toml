@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "opssecdev_pycommon"
-version = "0.0.12"
+version = "0.0.13"
 description = "Python common modules library for system administration"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -249,6 +249,7 @@ confidence = [
     "UNDEFINED"
 ]
 disable = [
+    "consider-using-with",
     "locally-disabled",
     "file-ignored",
     "suppressed-message",
