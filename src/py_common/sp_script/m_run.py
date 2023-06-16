@@ -49,7 +49,24 @@ def run_subprocess_check_call(name: str, description: str, command: str, subproc
     logger.info(f"{name} run started")
 
     try:
-        subprocess.check_call(command, shell=False)
+        if "|" in command:
+            # run first pipe command
+            separator_index = command.index("|")
+            run_command = command[0:separator_index]
+            command = command[separator_index + 1 :]
+            process = subprocess.Popen(run_command, shell=False, stdout=subprocess.PIPE)
+
+            # run any command in between
+            while "|" in command:
+                separator_index = command.index("|")
+                run_command = command[0:separator_index]
+                command = command[separator_index + 1 :]
+                process = subprocess.Popen(run_command, shell=False, stdout=subprocess.PIPE, stdin=process.stdout)
+            # run last pipe command
+            subprocess.check_call(command, shell=False, stdin=process.stdout)
+        else:
+            subprocess.check_call(command, shell=False)
+
     except subprocess.CalledProcessError as e:
         logger.exception(f"{name} run failed: {e}")
         sys.exit(1)
